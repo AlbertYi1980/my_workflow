@@ -1,0 +1,122 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="WorkflowCore.Activity1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:WorkflowCore.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:stj="clr-namespace:System.Text.Json;assembly=System.Text.Json"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="argument1" Type="InArgument(x:String)" />
+    <x:Property Name="argument2" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>WorkflowCore.Activity1_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Text.Json</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Activities.Presentation</AssemblyReference>
+      <AssemblyReference>System.Buffers</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Numerics</AssemblyReference>
+      <AssemblyReference>System.Numerics.Vectors</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.Unsafe</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Text.Encodings.Web</AssemblyReference>
+      <AssemblyReference>System.Text.Json</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Extensions</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
+      <AssemblyReference>System.Web.Extensions</AssemblyReference>
+      <AssemblyReference>System.Windows.Presentation</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Http</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>WorkflowCore</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Sequence222" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="stj:JsonElement" Name="a" />
+      <Variable x:TypeArguments="x:String" Name="variable1" />
+      <Variable x:TypeArguments="x:String" Name="variable2" />
+      <Variable x:TypeArguments="x:String" Name="variable3" />
+      <Variable x:TypeArguments="x:Boolean" Name="asa" />
+      <Variable x:TypeArguments="x:String" Name="variable4" />
+      <Variable x:TypeArguments="x:String" Name="variable5" />
+      <Variable x:TypeArguments="x:String" Name="variable6" />
+    </Sequence.Variables>
+    <Sequence DisplayName="Sequenc111" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="variable6" />
+        <Variable x:TypeArguments="x:String" Name="variable7" />
+        <Variable x:TypeArguments="x:String" Name="variable8" />
+      </Sequence.Variables>
+    </Sequence>
+    <local:MirrorDelete Args="{x:Null}" MirrorBase="{x:Null}" ModelKey="{x:Null}" Result="{x:Null}" TenantId="{x:Null}" sap2010:WorkflowViewState.IdRef="MirrorDelete_1" />
+    <local:UserTask Name="{x:Null}" sap2010:WorkflowViewState.IdRef="UserTask_1" />
+    <ForEach x:TypeArguments="stj:JsonElement">
+      <ForEach.Values>
+        <InArgument x:TypeArguments="scg:IEnumerable(stj:JsonElement)">
+          <mca:CSharpValue x:TypeArguments="scg:IEnumerable(stj:JsonElement)">JsonSerializer.Deserialize&lt;JsonElement&gt;("[]", null).EnumerateArray()</mca:CSharpValue>
+        </InArgument>
+      </ForEach.Values>
+      <ActivityAction x:TypeArguments="stj:JsonElement">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="stj:JsonElement" Name="item" />
+        </ActivityAction.Argument>
+      </ActivityAction>
+      <sap2010:WorkflowViewState.IdRef>ForEach`1_2</sap2010:WorkflowViewState.IdRef>
+    </ForEach>
+    <sads:DebugSymbol.Symbol>d0hDOlxVc2Vyc1x5aWNoZW5nXHNvdXJjZVxyZXBvc1xXb3JrZmxvd1NhbXBsZVxXb3JrZmxvd0NvcmVcQWN0aXZpdHkxLnhhbWwGQQNjDgIBAUwFUhACARBTBVOsAQIBD1QFVFQCAQ5VBWEPAgECWAtYqwECAQM=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="291,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MirrorDelete_1" sap:VirtualizedContainerService.HintSize="291,22" />
+      <sap2010:ViewStateData Id="UserTask_1" sap:VirtualizedContainerService.HintSize="291,22" />
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="291,211" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="313,600">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WorkflowCore.Activity1_1" sap:VirtualizedContainerService.HintSize="353,680" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

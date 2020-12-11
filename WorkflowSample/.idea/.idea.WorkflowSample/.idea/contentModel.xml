@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\yicheng\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\yicheng\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_WorkflowSample.-1993629098.00" t="ExcludeRecursive" />
+    <e p="C:\Users\yicheng\source\repos\my_workflow\WorkflowSample" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="WorkflowCore" t="IncludeRecursive">
+        <e p="Activities" t="Include">
+          <e p="Mirror" t="Include">
+            <e p="MirrorCreate.cs" t="Include" />
+            <e p="MirrorCrud.cs" t="Include" />
+            <e p="MirrorDelete.cs" t="Include" />
+            <e p="MirrorDetail.cs" t="Include" />
+            <e p="MirrorQuery.cs" t="Include" />
+            <e p="MirrorUpdate.cs" t="Include" />
+          </e>
+          <e p="StandardStateMachine.cs" t="Include" />
+          <e p="UserTask.cs" t="Include" />
+        </e>
+        <e p="Activity1.xaml" t="Include" />
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Json2Xaml.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="_WorkflowCore.g.cs" t="Include" />
+            <e p="Activity1.g.cs" t="Include" />
+            <e p="Activity1.g.xaml" t="Include" />
+            <e p="InProcessTempFiles" t="Include">
+              <e p="_WorkflowCore.g.cs" t="Include" />
+              <e p="Activity1.g.cs" t="Include" />
+            </e>
+            <e p="WorkflowCore_Activity1_BeforeInitializeComponentHelper.cs" t="Include" />
+            <e p="WorkflowCore_Activity1_BeforeInitializeComponentHelper.txt" t="Include" />
+          </e>
+        </e>
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="WorkflowCore.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WorkflowHost" t="IncludeRecursive">
+        <e p="Activity1.xaml" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="DefaultController.cs" t="Include" />
+          <e p="WorkflowController.cs" t="Include" />
+          <e p="WorkflowDesignController.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="_WorkflowHost.g.cs" t="Include" />
+            <e p="Activity1.g.cs" t="Include" />
+            <e p="Activity1.g.xaml" t="Include" />
+            <e p="ConsoleHost_Activity1_BeforeInitializeComponentHelper.cs" t="Include" />
+            <e p="ConsoleHost_Activity1_BeforeInitializeComponentHelper.txt" t="Include" />
+            <e p="InProcessTempFiles" t="Include">
+              <e p="_WorkflowHost.g.cs" t="Include" />
+              <e p="Activity1.g.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="Web.config" t="Include" />
+        <e p="Web.Debug.config" t="Include" />
+        <e p="Web.Release.config" t="Include" />
+        <e p="WorkflowHost.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WorkflowSample.sln" t="IncludeFlat" />
+      <e p="WorkflowTest" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="WorkflowTest.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
