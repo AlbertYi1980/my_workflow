@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Xaml;
 using Microsoft.CSharp.Activities;
 using WorkflowCore.Activities;
 using System.Reflection;
 using System.Activities.Expressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WorkflowCore
 {
@@ -20,9 +21,14 @@ namespace WorkflowCore
         public string Convert(string name, string json)
         {
        
-            var refTypes = new[] { typeof(JsonElement), typeof(JsonSerializer), typeof(ReadOnlySpan<>), typeof(Enumerable) };
+            var refTypes = new[] { 
+          
+                typeof(ReadOnlySpan<>), 
+                typeof(Enumerable),
+                typeof(JToken)
+            };
 
-            var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+            var jsonElement = JsonConvert.DeserializeObject<JObject>(json);
             var root = ParseActivity(jsonElement);
 
            
@@ -34,7 +40,7 @@ namespace WorkflowCore
 
 
             TextExpression.SetReferencesForImplementation(ab, refTypes.Select(t => new AssemblyReference() {Assembly = t.Assembly }).ToList());
-            TextExpression.SetNamespacesForImplementation(ab, refTypes.Select(t => t.Namespace).ToList());
+            TextExpression.SetNamespacesForImplementation(ab, refTypes.Select(t => t.Namespace).Distinct().ToList());
             var sb = new StringBuilder();
             var tw = new StringWriter(sb);
             var context = new XamlSchemaContext();
@@ -49,7 +55,7 @@ namespace WorkflowCore
         public Activity ConvertToActivity(string name, string json)
         {
 
-            var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+            var jsonElement = JsonConvert.DeserializeObject<JObject>(json);
 
 
             return ParseActivity(jsonElement);
@@ -57,10 +63,10 @@ namespace WorkflowCore
           
         }
 
-        private Activity ParseActivity(JsonElement jsonElement)
+        private Activity ParseActivity(JObject jsonElement)
         {
          
-            var type = jsonElement.GetProperty("$type").GetString();
+            var type = jsonElement["$type"].ToString();
             switch (type)
             {
                 case "sequence":
@@ -96,18 +102,18 @@ namespace WorkflowCore
             }
         }
 
-        private Activity ParseMirrorCrud(JsonElement jsonElement,string crudType)
+        private Activity ParseMirrorCrud(JObject jsonElement,string crudType)
         {
             var crud = CreateMirrorCrud(crudType);
             crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>( jsonElement.GetProperty("mirrorBase").GetString());
-            crud.TenantId = new CSharpValue<string>(jsonElement.GetProperty("tenantId").GetString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement.GetProperty("modelKey").GetString());
-            crud.Args = new CSharpValue<JsonElement>(jsonElement.GetProperty("args").GetString());
-            var resultExists = jsonElement.TryGetProperty("result", out var resultElement);
-            if (resultExists)
+            crud.MirrorBase = new CSharpValue<string>( jsonElement["mirrorBase"].ToString());
+            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
+            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
+            crud.Args = new CSharpValue<JToken>(jsonElement["args"].ToString());
+            var resultElement = jsonElement["result"]?.ToString();
+            if (resultElement !=  null)
             {
-                crud.Result = new OutArgument<JsonElement>(new CSharpReference<JsonElement>(resultElement.GetString()));
+                crud.Result = new OutArgument<JObject>(new CSharpReference<JObject>(resultElement));
             }
             return crud;
         }
@@ -132,32 +138,31 @@ namespace WorkflowCore
             }
         }
 
-        private Activity ParseUserTask(JsonElement jsonElement)
+        private Activity ParseUserTask(JObject jsonElement)
         {
-            var resultExists = jsonElement.TryGetProperty("result", out var resultElement); 
+            var resultElement = jsonElement["result"]?.ToString(); 
             var userTask = new UserTask() {
                 DisplayName = GetDisplayName(jsonElement),
-                Name = jsonElement.GetProperty("name").GetString(),       
+                Name = jsonElement["name"].ToString(),       
             };
-            if (resultExists)
+            if (resultElement != null)
             {
-                 userTask.Result = new OutArgument<JsonElement>(new CSharpReference<JsonElement>(resultElement.GetString()));
+                 userTask.Result = new OutArgument<JToken>(new CSharpReference<JToken>(resultElement));
             }
       
             return userTask;
         }
 
-        private Activity ParseSequence(JsonElement jsonElement)
+        private Activity ParseSequence(JObject jsonElement)
         {
-            var activitiesExists = jsonElement.TryGetProperty("activities", out var activitiesElement);
-            var variablesExists = jsonElement.TryGetProperty("variables", out var variablesElement);
+            var activitiesElement = (JArray)jsonElement["activities"];
             var sequence = new Sequence()
             {
                 DisplayName = GetDisplayName(jsonElement),
             };
-            if (activitiesExists)
+            if (activitiesElement != null)
             {
-                var activities =activitiesElement.EnumerateArray().Select(ParseActivity);
+                var activities =activitiesElement.Select(a =>  ParseActivity((JObject)a));
                 foreach (var activity in activities)
                 {
                     sequence.Activities.Add(activity);
@@ -170,13 +175,13 @@ namespace WorkflowCore
         }
 
 
-        private IEnumerable<Variable> ParseVariables(JsonElement jsonElement)
+        private IEnumerable<Variable> ParseVariables(JObject jsonElement)
         {
-            var variablesExists = jsonElement.TryGetProperty("variables", out var variablesElement);
-            if (!variablesExists) yield break;
-            foreach (var variableElement in variablesElement.EnumerateArray())
+            var variables = (JArray)jsonElement["variables"];
+            if (variables == null) yield break;
+            foreach (JObject variableElement in variables)
             {
-                var typeText = variableElement.GetProperty("type").GetString();
+                var typeText = variableElement["type"].ToString();
                 var type = MapType(typeText);
                 var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseVariableCore), BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
                 coreMethod = coreMethod.MakeGenericMethod(type);
@@ -184,39 +189,39 @@ namespace WorkflowCore
             }   
         }
 
-        private Variable ParseVariableCore<T>(JsonElement variableElement)
+        private Variable ParseVariableCore<T>(JObject variableElement)
         {
-            var name = variableElement.GetProperty("name").GetString();
+            var name = variableElement["name"].ToString();
   
-            var defaultExists = variableElement.TryGetProperty("default", out var defaultElment);
+            var defaultExpression = variableElement["default"]?.ToString();
             var variable = Variable.Create(name, typeof(T), VariableModifiers.None);
-            if (defaultExists)
+            if (defaultExpression != null)
             {
-                variable.Default = new CSharpValue<T>(defaultElment.GetString());
+                variable.Default = new CSharpValue<T>(defaultExpression);
             };
             return variable;
 
         }
 
 
-        private Activity ParseIf(JsonElement jsonElement)
+        private Activity ParseIf(JObject jsonElement)
         {
-            var thenExists = jsonElement.TryGetProperty("then", out var thenElement);
-            var elseExists  = jsonElement.TryGetProperty("else", out var esleElement);
+            var thenElement = (JObject)jsonElement["then"];
+            var esleElement =(JObject) jsonElement["else"];
           
             var @if = new If
             {
                 DisplayName = GetDisplayName(jsonElement),
-                Condition = new CSharpValue<bool>(jsonElement.GetProperty("condition").GetString()),    
+                Condition = new CSharpValue<bool>(jsonElement["condition"].ToString()),    
             };
 
-            if (thenExists)
+            if (thenElement != null)
             {
                 @if.Then = ParseActivity(thenElement);
             }
 
 
-            if (elseExists)
+            if (esleElement != null)
             {
                 @if.Else = ParseActivity(esleElement);
             }
@@ -226,17 +231,17 @@ namespace WorkflowCore
         }
 
 
-        private Activity ParseWhile(JsonElement jsonElement)
+        private Activity ParseWhile(JObject jsonElement)
         {
             var @while = new While()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
-            @while.Condition = new CSharpValue<bool>(jsonElement.GetProperty("condition").GetString());
-            var bodyExists = jsonElement.TryGetProperty("body", out var bodyElement);
-            if (bodyExists)
+            @while.Condition = new CSharpValue<bool>(jsonElement["condition"].ToString());
+            var body = (JObject)jsonElement["body"];
+            if (body != null)
             {
-                @while.Body = ParseActivity(bodyElement);
+                @while.Body = ParseActivity(body);
             }
             foreach (var v in ParseVariables(jsonElement))
             {
@@ -245,15 +250,15 @@ namespace WorkflowCore
             return @while;
         }
 
-        private Activity ParseDoWhile(JsonElement jsonElement)
+        private Activity ParseDoWhile(JObject jsonElement)
         {
             var @doWhile = new DoWhile()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
-            @doWhile.Condition = new CSharpValue<bool>(jsonElement.GetProperty("condition").GetString());
-            var bodyExists = jsonElement.TryGetProperty("body", out var bodyElement);
-            if (bodyExists)
+            @doWhile.Condition = new CSharpValue<bool>(jsonElement["condition"].ToString());
+            var bodyElement = (JObject)jsonElement["body"];
+            if (bodyElement != null)
             {
                 @doWhile.Body = ParseActivity(bodyElement);
             }
@@ -273,16 +278,20 @@ namespace WorkflowCore
                     return typeof(int);
                 case "string":
                     return typeof(string);
-                case "JsonElement":
-                    return typeof(JsonElement);
+                case "JObject":
+                    return typeof(JObject);
+                case "JArray":
+                    return typeof(JArray);
+                case "JToken":
+                    return typeof(JToken);
                 default:
                     throw new NotSupportedException($"can not support type {type}");
             }
         }
 
-         private Activity ParseSwitch(JsonElement jsonElement)
+         private Activity ParseSwitch(JObject jsonElement)
         {
-            var typeArguments = jsonElement.GetProperty("switchType").GetString();
+            var typeArguments = jsonElement["switchType"].ToString();
             var type = MapType(typeArguments);
             var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseSwitchCore), BindingFlags.Default |BindingFlags.Instance | BindingFlags.NonPublic );
             coreMethod = coreMethod.MakeGenericMethod(type);
@@ -297,28 +306,28 @@ namespace WorkflowCore
             throw new NotSupportedException($"not support type {type.Name}");
         }
 
-        private Activity ParseSwitchCore<T>(JsonElement jsonElement)
+        private Activity ParseSwitchCore<T>(JObject jsonElement)
         {
 
-            var expressionElement = jsonElement.GetProperty("expression");
-            var defaultExists = jsonElement.TryGetProperty("default", out var defaultElment);
-            var casesExist = jsonElement.TryGetProperty("cases", out var casesElment);
+            var expressionElement = jsonElement["expression"].ToString();
+            var defaultElment = (JObject)jsonElement["default"];
+            var casesElment = (JArray)jsonElement["cases"];
             var @switch = new Switch<T>()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
 
-            @switch.Expression = new CSharpValue<T>(expressionElement.GetString());
-            if (defaultExists)
+            @switch.Expression = new CSharpValue<T>(expressionElement);
+            if (defaultElment != null)
             {
                 @switch.Default = ParseActivity(defaultElment);
             }
-            if (casesExist)
+            if (casesElment !=  null)
             {
-                foreach(var caseElement in casesElment.EnumerateArray())
+                foreach(JObject caseElement in casesElment)
                 {
-                    var key = caseElement.GetProperty("key").GetString();
-                    var valueElement = caseElement.GetProperty("value");
+                    var key = caseElement["key"].ToString();
+                    var valueElement = (JObject)caseElement["value"];
                     @switch.Cases.Add(new KeyValuePair<T, Activity>(ParseCaseKey<T>(key), ParseActivity(valueElement) ));
                 }
                ;
@@ -326,65 +335,64 @@ namespace WorkflowCore
             return @switch;
         }
 
-        private Activity ParseForeach(JsonElement jsonElement)
+        private Activity ParseForeach(JObject jsonElement)
         {
 
-            var values = jsonElement.GetProperty("values").GetString();
-            var valueName = jsonElement.GetProperty("valueName").GetString();
-            var bodyExists = jsonElement.TryGetProperty("body", out var bodyElment);
+            var values = jsonElement["values"].ToString();
+            var valueName = jsonElement["valueName"].ToString();
+            var body = (JObject)jsonElement["body"];
 
-            var @foreach = new ForEach<JsonElement>()
+            var @foreach = new ForEach<JObject>()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
 
-            @foreach.Values = new CSharpValue<IEnumerable<JsonElement>>(values);
-            var activityAction = new ActivityAction<JsonElement>();
-            activityAction.Argument = new DelegateInArgument<JsonElement>(valueName);
-            if (bodyExists)
+            @foreach.Values = new CSharpValue<IEnumerable<JObject>>(values);
+            var activityAction = new ActivityAction<JObject>();
+            activityAction.Argument = new DelegateInArgument<JObject>(valueName);
+            if (body  != null)
             {
-                activityAction.Handler = ParseActivity(bodyElment);
+                activityAction.Handler = ParseActivity(body);
             }
             @foreach.Body = activityAction;
             return @foreach;
         }
 
-        private Activity ParseAssign(JsonElement jsonElement)
+        private Activity ParseAssign(JObject jsonElement)
         {
-            var typeArguments = jsonElement.GetProperty("assignType").GetString();
+            var typeArguments = jsonElement["assignType"].ToString();
             var type = MapType(typeArguments);
             var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseAssignCore), BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
             coreMethod = coreMethod.MakeGenericMethod(type);
             return (Activity)coreMethod.Invoke(this, new object[] { jsonElement });
         }
 
-        private Activity ParseAssignCore<T>(JsonElement jsonElement)
+        private Activity ParseAssignCore<T>(JObject jsonElement)
         {
             var assign = new Assign<T>()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
-            var to = jsonElement.GetProperty("to").GetString();
+            var to = jsonElement["to"].ToString();
             assign.To = new OutArgument<T>(new CSharpReference<T>(to));
-            var value = jsonElement.GetProperty("value").GetString();
+            var value = jsonElement["value"].ToString();
             assign.Value = new CSharpValue<T>(value);
             return assign;
         }
 
-        private Activity ParseWriteLine(JsonElement jsonElement)
+        private Activity ParseWriteLine(JObject jsonElement)
         {
             var writeLine = new WriteLine()
             {
                 DisplayName = GetDisplayName(jsonElement)
             };
-            writeLine.Text = new CSharpValue<string>(jsonElement.GetProperty("text").GetString());
+            writeLine.Text = new CSharpValue<string>(jsonElement["text"].ToString());
             return writeLine;
         }
 
-        private string GetDisplayName(JsonElement jsonElement)
+        private string GetDisplayName(JObject jsonElement)
         {
-            var displayNameExists = jsonElement.TryGetProperty("displayName", out var displayNameElement);
-            return  displayNameExists ? displayNameElement.GetString() :null ;
+            return jsonElement["displayName"]?.ToString();
         }
 
 

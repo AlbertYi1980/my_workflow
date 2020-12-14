@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Activities;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+
 
 namespace WorkflowCore.Activities
 {
@@ -11,8 +13,8 @@ namespace WorkflowCore.Activities
         public InArgument<string> MirrorBase { get; set; }
         public InArgument<string>   TenantId { get; set; }
         public InArgument<string> ModelKey { get; set; }
-        public InArgument<JsonElement> Args { get; set; }
-        public OutArgument<JsonElement> Result { get; set; }
+        public InArgument<JToken> Args { get; set; }
+        public OutArgument<JObject> Result { get; set; }
 
         protected sealed override void Execute(NativeActivityContext context)
         {
@@ -20,7 +22,7 @@ namespace WorkflowCore.Activities
             var uri = new Uri($"{mirrorBase}/model/{ModelKey.Get(context)}/{CrudType}");
             var httpClient = new HttpClient();
             var body = Args.Get(context);
-            var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage
             {
                 Headers = { { "TenantId", TenantId.Get(context) } },
@@ -30,7 +32,7 @@ namespace WorkflowCore.Activities
             };
             var response = httpClient.SendAsync(request).Result;
             var json = response.Content.ReadAsStringAsync().Result;
-            Result.Set(context, JsonSerializer.Deserialize<JsonElement>(json));
+            Result.Set(context, JsonConvert.DeserializeObject<JObject>(json));
         }
 
         protected abstract string  CrudType { get; }

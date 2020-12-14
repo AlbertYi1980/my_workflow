@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Activities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace WorkflowCore.Activities
 {
-    public  class UserTask: NativeActivity<JsonElement>
+    public  class UserTask: NativeActivity<JToken>
     {
         public string Name { get; set; }
 
@@ -25,9 +20,8 @@ namespace WorkflowCore.Activities
 
         private void Callback(NativeActivityContext context, Bookmark bookmark, object value)
         {
-            var args = value is JsonElement element ? element : new JsonElement();
             context.RemoveBookmark(Name);
-            Result .Set(context,args );
+            Result .Set(context,(JToken) value );
    
             
         }
