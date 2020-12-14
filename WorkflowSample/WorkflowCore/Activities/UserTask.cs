@@ -18,6 +18,9 @@ namespace WorkflowCore.Activities
         protected override void Execute(NativeActivityContext context)
         {
              context.CreateBookmark(Name, Callback);
+
+            
+           
         }
 
         private void Callback(NativeActivityContext context, Bookmark bookmark, object value)

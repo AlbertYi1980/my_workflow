@@ -2,6 +2,7 @@
 using System.Activities;
 using System.Activities.XamlIntegration;
 using System.IO;
+using System.Text.Json;
 using WorkflowCore;
 
 namespace WorkflowTest
@@ -10,8 +11,10 @@ namespace WorkflowTest
     {
         static void Main(string[] args)
         {
+        
+
             var convertor = new Json2Xaml();
-            var json = "{\"$type\":\"sequence\",\"variables\":[{\"type\":\"int\",\"name\":\"a\",\"default\":\"0\"}],\"activities\":[{\"$type\":\"writeLine\",\"text\":\"a.ToString()\"},{\"$type\":\"assign\",\"assignType\":\"int\",\"to\":\"a\",\"value\":\"1\"},{\"$type\":\"writeLine\",\"text\":\"a.ToString()\"}]}";
+            var json = "{\"$type\":\"sequence\",\"variables\":[{\"type\":\"JsonElement\",\"name\":\"a\"}],\"activities\":[{\"$type\":\"mirrorCreate\",\"mirrorBase\":\"\\\"http://localhost:5000/\\\"\",\"tenantId\":\"\\\"a\\\"\",\"modelKey\":\"\\\"kkk\\\"\",\"args\":\"JsonSerializer.Deserialize<JsonElement>(\\\"{\\\\\\\"model\\\\\\\":{\\\\\\\"data\\\\\\\":{\\\\\\\"a\\\\\\\":1,\\\\\\\"b\\\\\\\":\\\\\\\"hello\\\\\\\"}}}\\\",null)\",\"result\":\"a\"},{\"$type\":\"writeLine\",\"text\":\"a.ToString()\"}]}";
             var xaml = convertor.Convert("aaFirst", json);
             Console.WriteLine(xaml);
             var settings = new ActivityXamlServicesSettings
