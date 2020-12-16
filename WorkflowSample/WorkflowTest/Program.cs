@@ -13,7 +13,7 @@ namespace WorkflowTest
         {
         
             var convertor = new Json2Xaml();
-            var json = "{\"$type\":\"sequence\",\"variables\":[{\"type\":\"JObject\",\"name\":\"a\"}],\"activities\":[{\"$type\":\"mirrorCreate\",\"mirrorBase\":\"\\\"http://localhost:5000/\\\"\",\"tenantId\":\"\\\"a\\\"\",\"modelKey\":\"\\\"kkk\\\"\",\"args\":\"JToken.Parse(\\\"{\\\\\\\"model\\\\\\\":{\\\\\\\"data\\\\\\\":{\\\\\\\"a\\\\\\\":1,\\\\\\\"b\\\\\\\":\\\\\\\"hello\\\\\\\"}}}\\\",null)\",\"result\":\"a\"},{\"$type\":\"writeLine\",\"text\":\"a.ToString()\"}]}";
+            var json = LoadJsonFromFile("temp.json");
           
             var xaml = convertor.Convert("aaFirst", json);
             Console.WriteLine(xaml);
@@ -27,8 +27,9 @@ namespace WorkflowTest
             {  
                 var activity = ActivityXamlServices.Load(new StringReader(xaml), settings);
                 var a = new WorkflowApplication(activity);
+            
                 a.Run();
-
+                
             }
             catch(Exception e)
             {
@@ -38,6 +39,13 @@ namespace WorkflowTest
            
 
             Console.ReadLine();
+        }
+
+        private static string LoadJsonFromFile(string fileName)
+        {
+            var dir = @"C:\Users\yicheng\Downloads\OZtree-master\OZprivate\Trees";
+            var path = Path.Combine(dir, fileName);
+            return File.ReadAllText(path);
         }
     }
 }

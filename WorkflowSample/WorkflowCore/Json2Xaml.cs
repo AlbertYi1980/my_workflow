@@ -88,55 +88,103 @@ namespace WorkflowCore
                 case "assign":
                     return ParseAssign(jsonElement);
                 case "mirrorCreate":
-                   return  ParseMirrorCrud(jsonElement, "create");
+                   return  ParseMirrorCreate(jsonElement);
                 case "mirrorDelete":
-                    return ParseMirrorCrud(jsonElement, "delete");
+                    return ParseMirrorDelete(jsonElement);
                 case "mirrorUpdate":
-                    return ParseMirrorCrud(jsonElement, "update");
+                    return ParseMirrorUpdate(jsonElement);
                 case "mirrorQuery":
-                    return ParseMirrorCrud(jsonElement, "query");
+                    return ParseMirrorQuery(jsonElement);
                 case "mirrorDetail":
-                    return ParseMirrorCrud(jsonElement, "detail");
+                    return ParseMirrorDetail(jsonElement);
                 default:
                     throw new NotSupportedException($"type {type} not been supported.");
             }
         }
 
-        private Activity ParseMirrorCrud(JObject jsonElement,string crudType)
+        private Activity ParseMirrorCreate(JObject jsonElement)
         {
-            var crud = CreateMirrorCrud(crudType);
+            var crud = new MirrorCreate();
             crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>( jsonElement["mirrorBase"].ToString());
+            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
             crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
             crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Args = new CSharpValue<JToken>(jsonElement["args"].ToString());
+            crud.Model = new CSharpValue<string>(jsonElement["model"].ToString());
             var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement !=  null)
+            if (resultElement != null)
             {
-                crud.Result = new OutArgument<JObject>(new CSharpReference<JObject>(resultElement));
+                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
             }
             return crud;
         }
 
-        private MirrorCrud CreateMirrorCrud(string crudType)
+        private Activity ParseMirrorDelete(JObject jsonElement)
         {
-        
-            switch (crudType)
+            var crud = new MirrorDelete();
+            crud.DisplayName = GetDisplayName(jsonElement);
+            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
+            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
+            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
+            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
+            var resultElement = jsonElement["result"]?.ToString();
+            if (resultElement != null)
             {
-                case "create":
-                    return new MirrorCreate();
-                case "delete":
-                    return new MirrorDelete();
-                case "update":
-                    return new MirrorUpdate();
-                case "query":
-                    return new MirrorQuery();
-                case "detail":
-                    return new MirrorDetail();
-                default:
-                    throw new NotSupportedException($"can not support mirror crud type {crudType}");
+                crud.Result = new OutArgument<bool>(new CSharpReference<bool>(resultElement));
             }
+            return crud;
         }
+
+        private Activity ParseMirrorUpdate(JObject jsonElement)
+        {
+            var crud = new MirrorUpdate();
+            crud.DisplayName = GetDisplayName(jsonElement);
+            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
+            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
+            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
+            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
+            crud.Model = new CSharpValue<string>(jsonElement["model"].ToString());
+            var resultElement = jsonElement["result"]?.ToString();
+            if (resultElement != null)
+            {
+                crud.Result = new OutArgument<bool>(new CSharpReference<bool>(resultElement));
+            }
+            return crud;
+        }
+
+        private Activity ParseMirrorQuery(JObject jsonElement)
+        {
+            var crud = new MirrorQuery();
+            crud.DisplayName = GetDisplayName(jsonElement);
+            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
+            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
+            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
+            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
+            crud.Sort = new CSharpValue<string>(jsonElement["sort"].ToString());
+            var resultElement = jsonElement["result"]?.ToString();
+            if (resultElement != null)
+            {
+                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+            }
+            return crud;
+        }
+
+        private Activity ParseMirrorDetail(JObject jsonElement)
+        {
+            var crud = new MirrorDetail();
+            crud.DisplayName = GetDisplayName(jsonElement);
+            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
+            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
+            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
+            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
+            var resultElement = jsonElement["result"]?.ToString();
+            if (resultElement != null)
+            {
+                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+            }
+            return crud;
+        }
+
+    
 
         private Activity ParseUserTask(JObject jsonElement)
         {
@@ -147,7 +195,7 @@ namespace WorkflowCore
             };
             if (resultElement != null)
             {
-                 userTask.Result = new OutArgument<JToken>(new CSharpReference<JToken>(resultElement));
+                userTask.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
             }
       
             return userTask;
@@ -278,12 +326,9 @@ namespace WorkflowCore
                     return typeof(int);
                 case "string":
                     return typeof(string);
-                case "JObject":
-                    return typeof(JObject);
-                case "JArray":
-                    return typeof(JArray);
-                case "JToken":
-                    return typeof(JToken);
+                case "json":
+                    return typeof(string);
+            
                 default:
                     throw new NotSupportedException($"can not support type {type}");
             }

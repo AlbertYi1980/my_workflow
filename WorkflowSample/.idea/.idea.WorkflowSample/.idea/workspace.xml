@@ -21,21 +21,26 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="my workflow">
+    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="newton soft replace system.text.json">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWorkflow/Activity1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkflow/Activity1.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWorkflow/MyWorkflow.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkflow/MyWorkflow.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWorkflow/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkflow/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorCreate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorCreate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorCrud.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorCrud.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorDelete.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorDelete.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorDetail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorUpdate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/Mirror/MirrorUpdate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowCore/Activities/UserTask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Activities/UserTask.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowCore/Json2Xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/Json2Xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowCore/WorkflowCore.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/WorkflowCore.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WorkflowCore/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowCore/packages.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowHost/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowHost/Web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WorkflowTest/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowTest/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowHost/WorkflowHost.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowHost/WorkflowHost.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowHost/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowHost/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowSample.sln" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowSample.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WorkflowTest/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowTest/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WorkflowTest/WorkflowTest.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowTest/WorkflowTest.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +51,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/yicheng/source/repos/my_workflow/WorkflowSample/MyWorkflow/Activity1.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/yicheng/source/repos/my_workflow/WorkflowSample/MyWorkflow/Activity1.xaml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -155,12 +161,13 @@
     <MESSAGE value="workflow def" />
     <MESSAGE value="没有workflow" />
     <MESSAGE value="my workflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="my workflow" />
+    <MESSAGE value="newton soft replace system.text.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="newton soft replace system.text.json" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607915771293">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607935405560">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1607915771293" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1607935405560" />
   </component>
 </project>

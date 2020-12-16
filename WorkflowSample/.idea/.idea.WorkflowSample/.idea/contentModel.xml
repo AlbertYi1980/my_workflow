@@ -33,6 +33,7 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="WorkflowCore" t="IncludeRecursive">
         <e p="Activities" t="Include">
+          <e p="CSharpScript.cs" t="Include" />
           <e p="Mirror" t="Include">
             <e p="MirrorCreate.cs" t="Include" />
             <e p="MirrorCrud.cs" t="Include" />
@@ -52,17 +53,15 @@
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
         </e>
+        <e p="Stores" t="Include">
+          <e p="AsyncResult.cs" t="Include" />
+          <e p="CompletedAsyncResult.cs" t="Include" />
+          <e p="CustomInstanceStoreBase.cs" t="Include" />
+          <e p="MemoryCacheInstanceStore.cs" t="Include" />
+        </e>
         <e p="WorkflowCore.csproj" t="IncludeRecursive" />
       </e>
       <e p="WorkflowHost" t="IncludeRecursive">
-        <e p="_bin_deployableAssemblies" t="Include">
-          <e p="amd64" t="Include">
-            <e p="Microsoft.VC90.CRT" t="Include" />
-          </e>
-          <e p="x86" t="Include">
-            <e p="Microsoft.VC90.CRT" t="Include" />
-          </e>
-        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
           <e p="DefaultController.cs" t="Include" />
@@ -85,6 +84,18 @@
         <e p="WorkflowHost.csproj" t="IncludeRecursive" />
       </e>
       <e p="WorkflowSample.sln" t="IncludeFlat" />
+      <e p="WorkflowScripting" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CSharpExecuter.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="PythonExecuter.cs" t="Include" />
+        <e p="WorkflowScripting.csproj" t="IncludeRecursive" />
+      </e>
       <e p="WorkflowTest" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
