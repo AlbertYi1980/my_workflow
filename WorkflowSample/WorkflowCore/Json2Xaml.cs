@@ -20,10 +20,10 @@ namespace WorkflowCore
     {
         public string Convert(string name, string json)
         {
-       
-            var refTypes = new[] { 
-          
-                typeof(ReadOnlySpan<>), 
+
+            var refTypes = new[] {
+
+                typeof(ReadOnlySpan<>),
                 typeof(Enumerable),
                 typeof(JToken)
             };
@@ -31,7 +31,7 @@ namespace WorkflowCore
             var jsonElement = JsonConvert.DeserializeObject<JObject>(json);
             var root = ParseActivity(jsonElement);
 
-           
+
             var ab = new ActivityBuilder
             {
                 Name = name,
@@ -39,193 +39,197 @@ namespace WorkflowCore
             };
 
 
-            TextExpression.SetReferencesForImplementation(ab, refTypes.Select(t => new AssemblyReference() {Assembly = t.Assembly }).ToList());
+            TextExpression.SetReferencesForImplementation(ab, refTypes.Select(t => new AssemblyReference() { Assembly = t.Assembly }).ToList());
             TextExpression.SetNamespacesForImplementation(ab, refTypes.Select(t => t.Namespace).Distinct().ToList());
             var sb = new StringBuilder();
             var tw = new StringWriter(sb);
             var context = new XamlSchemaContext();
-           
+
             var xw = ActivityXamlServices.CreateBuilderWriter(new XamlXmlWriter(tw, context));
-          
+
             XamlServices.Save(xw, ab);
-            
+
             return sb.ToString();
         }
 
         public Activity ConvertToActivity(string name, string json)
         {
 
-            var jsonElement = JsonConvert.DeserializeObject<JObject>(json);
+            var node = JsonConvert.DeserializeObject<JObject>(json);
 
 
-            return ParseActivity(jsonElement);
-          
-          
+            return ParseActivity(node);
+
+
         }
 
-        private Activity ParseActivity(JObject jsonElement)
+        private Activity ParseActivity(JObject node)
         {
-         
-            var type = jsonElement["$type"].ToString();
+
+            var type = node["$type"].ToString();
             switch (type)
             {
                 case "sequence":
-                    return ParseSequence(jsonElement);
+                    return ParseSequence(node);
                 case "if":
-                        return ParseIf(jsonElement);
+                    return ParseIf(node);
                 case "while":
-                    return ParseWhile(jsonElement);
+                    return ParseWhile(node);
                 case "doWhile":
-                    return ParseDoWhile(jsonElement);
+                    return ParseDoWhile(node);
                 case "writeLine":
-                    return ParseWriteLine(jsonElement);
+                    return ParseWriteLine(node);
                 case "userTask":
-                    return ParseUserTask(jsonElement);
+                    return ParseUserTask(node);
                 case "switch":
-                    return ParseSwitch(jsonElement);
+                    return ParseSwitch(node);
                 case "foreach":
-                    return ParseForeach(jsonElement);
+                    return ParseForeach(node);
                 case "assign":
-                    return ParseAssign(jsonElement);
+                    return ParseAssign(node);
                 case "mirrorCreate":
-                   return  ParseMirrorCreate(jsonElement);
+                    return ParseMirrorCreate(node);
                 case "mirrorDelete":
-                    return ParseMirrorDelete(jsonElement);
+                    return ParseMirrorDelete(node);
                 case "mirrorUpdate":
-                    return ParseMirrorUpdate(jsonElement);
+                    return ParseMirrorUpdate(node);
                 case "mirrorQuery":
-                    return ParseMirrorQuery(jsonElement);
+                    return ParseMirrorQuery(node);
                 case "mirrorDetail":
-                    return ParseMirrorDetail(jsonElement);
+                    return ParseMirrorDetail(node);
+                case "stateMachine":
+                    return ParseMachineState(node);
                 default:
                     throw new NotSupportedException($"type {type} not been supported.");
             }
         }
 
-        private Activity ParseMirrorCreate(JObject jsonElement)
+        private Activity ParseMirrorCreate(JObject node)
         {
-            var crud = new MirrorCreate();
-            crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
-            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Model = new CSharpValue<string>(jsonElement["model"].ToString());
-            var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement != null)
+            var create = new MirrorCreate();
+            create.DisplayName = GetDisplayName(node);
+            create.MirrorBase = new CSharpValue<string>(node["mirrorBase"].ToString());
+            create.TenantId = new CSharpValue<string>(node["tenantId"].ToString());
+            create.ModelKey = new CSharpValue<string>(node["modelKey"].ToString());
+            create.Model = new CSharpValue<string>(node["model"].ToString());
+            var resultNode = node["result"]?.ToString();
+            if (resultNode != null)
             {
-                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+                create.Result = new OutArgument<string>(new CSharpReference<string>(resultNode));
             }
-            return crud;
+            return create;
         }
 
-        private Activity ParseMirrorDelete(JObject jsonElement)
+        private Activity ParseMirrorDelete(JObject node)
         {
-            var crud = new MirrorDelete();
-            crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
-            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
-            var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement != null)
+            var delete = new MirrorDelete();
+            delete.DisplayName = GetDisplayName(node);
+            delete.MirrorBase = new CSharpValue<string>(node["mirrorBase"].ToString());
+            delete.TenantId = new CSharpValue<string>(node["tenantId"].ToString());
+            delete.ModelKey = new CSharpValue<string>(node["modelKey"].ToString());
+            delete.Filter = new CSharpValue<string>(node["filter"].ToString());
+            var resultNode = node["result"]?.ToString();
+            if (resultNode != null)
             {
-                crud.Result = new OutArgument<bool>(new CSharpReference<bool>(resultElement));
+                delete.Result = new OutArgument<bool>(new CSharpReference<bool>(resultNode));
             }
-            return crud;
+            return delete;
         }
 
-        private Activity ParseMirrorUpdate(JObject jsonElement)
+        private Activity ParseMirrorUpdate(JObject node)
         {
-            var crud = new MirrorUpdate();
-            crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
-            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
-            crud.Model = new CSharpValue<string>(jsonElement["model"].ToString());
-            var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement != null)
+            var update = new MirrorUpdate();
+            update.DisplayName = GetDisplayName(node);
+            update.MirrorBase = new CSharpValue<string>(node["mirrorBase"].ToString());
+            update.TenantId = new CSharpValue<string>(node["tenantId"].ToString());
+            update.ModelKey = new CSharpValue<string>(node["modelKey"].ToString());
+            update.Filter = new CSharpValue<string>(node["filter"].ToString());
+            update.Model = new CSharpValue<string>(node["model"].ToString());
+            var resultNode = node["result"]?.ToString();
+            if (resultNode != null)
             {
-                crud.Result = new OutArgument<bool>(new CSharpReference<bool>(resultElement));
+                update.Result = new OutArgument<bool>(new CSharpReference<bool>(resultNode));
             }
-            return crud;
+            return update;
         }
 
-        private Activity ParseMirrorQuery(JObject jsonElement)
+        private Activity ParseMirrorQuery(JObject node)
         {
-            var crud = new MirrorQuery();
-            crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
-            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
-            crud.Sort = new CSharpValue<string>(jsonElement["sort"].ToString());
-            var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement != null)
+            var query = new MirrorQuery();
+            query.DisplayName = GetDisplayName(node);
+            query.MirrorBase = new CSharpValue<string>(node["mirrorBase"].ToString());
+            query.TenantId = new CSharpValue<string>(node["tenantId"].ToString());
+            query.ModelKey = new CSharpValue<string>(node["modelKey"].ToString());
+            query.Filter = new CSharpValue<string>(node["filter"].ToString());
+            query.Sort = new CSharpValue<string>(node["sort"].ToString());
+            var resultNode = node["result"]?.ToString();
+            if (resultNode != null)
             {
-                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+                query.Result = new OutArgument<string>(new CSharpReference<string>(resultNode));
             }
-            return crud;
+            return query;
         }
 
-        private Activity ParseMirrorDetail(JObject jsonElement)
+        private Activity ParseMirrorDetail(JObject node)
         {
-            var crud = new MirrorDetail();
-            crud.DisplayName = GetDisplayName(jsonElement);
-            crud.MirrorBase = new CSharpValue<string>(jsonElement["mirrorBase"].ToString());
-            crud.TenantId = new CSharpValue<string>(jsonElement["tenantId"].ToString());
-            crud.ModelKey = new CSharpValue<string>(jsonElement["modelKey"].ToString());
-            crud.Filter = new CSharpValue<string>(jsonElement["filter"].ToString());
-            var resultElement = jsonElement["result"]?.ToString();
-            if (resultElement != null)
+            var detail = new MirrorDetail();
+            detail.DisplayName = GetDisplayName(node);
+            detail.MirrorBase = new CSharpValue<string>(node["mirrorBase"].ToString());
+            detail.TenantId = new CSharpValue<string>(node["tenantId"].ToString());
+            detail.ModelKey = new CSharpValue<string>(node["modelKey"].ToString());
+            detail.Filter = new CSharpValue<string>(node["filter"].ToString());
+            var resultNode = node["result"]?.ToString();
+            if (resultNode != null)
             {
-                crud.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+                detail.Result = new OutArgument<string>(new CSharpReference<string>(resultNode));
             }
-            return crud;
+            return detail;
         }
 
-    
 
-        private Activity ParseUserTask(JObject jsonElement)
+
+        private Activity ParseUserTask(JObject node)
         {
-            var resultElement = jsonElement["result"]?.ToString(); 
-            var userTask = new UserTask() {
-                DisplayName = GetDisplayName(jsonElement),
-                Name = jsonElement["name"].ToString(),       
+            var result = node["result"]?.ToString();
+            var userTask = new UserTask()
+            {
+                DisplayName = GetDisplayName(node),
+                Name = node["name"].ToString(),
             };
-            if (resultElement != null)
+            if (result != null)
             {
-                userTask.Result = new OutArgument<string>(new CSharpReference<string>(resultElement));
+                userTask.Result = new OutArgument<string>(new CSharpReference<string>(result));
             }
-      
+
             return userTask;
         }
 
-        private Activity ParseSequence(JObject jsonElement)
+        private Activity ParseSequence(JObject node)
         {
-            var activitiesElement = (JArray)jsonElement["activities"];
+            var activitiesElement = (JArray)node["activities"];
             var sequence = new Sequence()
             {
-                DisplayName = GetDisplayName(jsonElement),
+                DisplayName = GetDisplayName(node),
             };
             if (activitiesElement != null)
             {
-                var activities =activitiesElement.Select(a =>  ParseActivity((JObject)a));
+                var activities = activitiesElement.Select(a => ParseActivity((JObject)a));
                 foreach (var activity in activities)
                 {
                     sequence.Activities.Add(activity);
                 }
             }
-            foreach(var v in ParseVariables(jsonElement)){
+            foreach (var v in ParseVariables(node))
+            {
                 sequence.Variables.Add(v);
             }
             return sequence;
         }
 
 
-        private IEnumerable<Variable> ParseVariables(JObject jsonElement)
+        private IEnumerable<Variable> ParseVariables(JObject node)
         {
-            var variables = (JArray)jsonElement["variables"];
+            var variables = (JArray)node["variables"];
             if (variables == null) yield break;
             foreach (JObject variableElement in variables)
             {
@@ -233,15 +237,15 @@ namespace WorkflowCore
                 var type = MapType(typeText);
                 var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseVariableCore), BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
                 coreMethod = coreMethod.MakeGenericMethod(type);
-                yield return   (Variable)coreMethod.Invoke(this, new object[] { variableElement });
-            }   
+                yield return (Variable)coreMethod.Invoke(this, new object[] { variableElement });
+            }
         }
 
-        private Variable ParseVariableCore<T>(JObject variableElement)
+        private Variable ParseVariableCore<T>(JObject variableNode)
         {
-            var name = variableElement["name"].ToString();
-  
-            var defaultExpression = variableElement["default"]?.ToString();
+            var name = variableNode["name"].ToString();
+
+            var defaultExpression = variableNode["default"]?.ToString();
             var variable = Variable.Create(name, typeof(T), VariableModifiers.None);
             if (defaultExpression != null)
             {
@@ -252,65 +256,65 @@ namespace WorkflowCore
         }
 
 
-        private Activity ParseIf(JObject jsonElement)
+        private Activity ParseIf(JObject node)
         {
-            var thenElement = (JObject)jsonElement["then"];
-            var esleElement =(JObject) jsonElement["else"];
-          
+            var thenNode = (JObject)node["then"];
+            var esleNode = (JObject)node["else"];
+
             var @if = new If
             {
-                DisplayName = GetDisplayName(jsonElement),
-                Condition = new CSharpValue<bool>(jsonElement["condition"].ToString()),    
+                DisplayName = GetDisplayName(node),
+                Condition = new CSharpValue<bool>(node["condition"].ToString()),
             };
 
-            if (thenElement != null)
+            if (thenNode != null)
             {
-                @if.Then = ParseActivity(thenElement);
+                @if.Then = ParseActivity(thenNode);
             }
 
 
-            if (esleElement != null)
+            if (esleNode != null)
             {
-                @if.Else = ParseActivity(esleElement);
+                @if.Else = ParseActivity(esleNode);
             }
 
-          
+
             return @if;
         }
 
 
-        private Activity ParseWhile(JObject jsonElement)
+        private Activity ParseWhile(JObject node)
         {
             var @while = new While()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
-            @while.Condition = new CSharpValue<bool>(jsonElement["condition"].ToString());
-            var body = (JObject)jsonElement["body"];
+            @while.Condition = new CSharpValue<bool>(node["condition"].ToString());
+            var body = node["body"]?.Value<JObject>();
             if (body != null)
             {
                 @while.Body = ParseActivity(body);
             }
-            foreach (var v in ParseVariables(jsonElement))
+            foreach (var v in ParseVariables(node))
             {
                 @while.Variables.Add(v);
             }
             return @while;
         }
 
-        private Activity ParseDoWhile(JObject jsonElement)
+        private Activity ParseDoWhile(JObject node)
         {
             var @doWhile = new DoWhile()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
-            @doWhile.Condition = new CSharpValue<bool>(jsonElement["condition"].ToString());
-            var bodyElement = (JObject)jsonElement["body"];
+            @doWhile.Condition = new CSharpValue<bool>(node["condition"].ToString());
+            var bodyElement = (JObject)node["body"];
             if (bodyElement != null)
             {
                 @doWhile.Body = ParseActivity(bodyElement);
             }
-            foreach (var v in ParseVariables(jsonElement))
+            foreach (var v in ParseVariables(node))
             {
                 doWhile.Variables.Add(v);
             }
@@ -328,74 +332,74 @@ namespace WorkflowCore
                     return typeof(string);
                 case "json":
                     return typeof(string);
-            
+
                 default:
                     throw new NotSupportedException($"can not support type {type}");
             }
         }
 
-         private Activity ParseSwitch(JObject jsonElement)
+        private Activity ParseSwitch(JObject node)
         {
-            var typeArguments = jsonElement["switchType"].ToString();
+            var typeArguments = node["switchType"].ToString();
             var type = MapType(typeArguments);
-            var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseSwitchCore), BindingFlags.Default |BindingFlags.Instance | BindingFlags.NonPublic );
+            var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseSwitchCore), BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
             coreMethod = coreMethod.MakeGenericMethod(type);
-            return (Activity)coreMethod.Invoke(this, new object[] { jsonElement });
+            return (Activity)coreMethod.Invoke(this, new object[] { node });
         }
 
         private T ParseCaseKey<T>(string key)
         {
             var type = typeof(T);
-            if (type == typeof(int)) return (T) (object)int.Parse(key);
+            if (type == typeof(int)) return (T)(object)int.Parse(key);
             if (type == typeof(string)) return (T)(object)(key);
             throw new NotSupportedException($"not support type {type.Name}");
         }
 
-        private Activity ParseSwitchCore<T>(JObject jsonElement)
+        private Activity ParseSwitchCore<T>(JObject node)
         {
 
-            var expressionElement = jsonElement["expression"].ToString();
-            var defaultElment = (JObject)jsonElement["default"];
-            var casesElment = (JArray)jsonElement["cases"];
+            var expressionElement = node["expression"].ToString();
+            var defaultNode = (JObject)node["default"];
+            var casesElment = (JArray)node["cases"];
             var @switch = new Switch<T>()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
 
             @switch.Expression = new CSharpValue<T>(expressionElement);
-            if (defaultElment != null)
+            if (defaultNode != null)
             {
-                @switch.Default = ParseActivity(defaultElment);
+                @switch.Default = ParseActivity(defaultNode);
             }
-            if (casesElment !=  null)
+            if (casesElment != null)
             {
-                foreach(JObject caseElement in casesElment)
+                foreach (JObject caseNode in casesElment)
                 {
-                    var key = caseElement["key"].ToString();
-                    var valueElement = (JObject)caseElement["value"];
-                    @switch.Cases.Add(new KeyValuePair<T, Activity>(ParseCaseKey<T>(key), ParseActivity(valueElement) ));
+                    var key = caseNode["key"].ToString();
+                    var valueNode = (JObject)caseNode["value"];
+                    @switch.Cases.Add(new KeyValuePair<T, Activity>(ParseCaseKey<T>(key), ParseActivity(valueNode)));
                 }
                ;
             }
             return @switch;
         }
 
-        private Activity ParseForeach(JObject jsonElement)
+        private Activity ParseForeach(JObject node)
         {
 
-            var values = jsonElement["values"].ToString();
-            var valueName = jsonElement["valueName"].ToString();
-            var body = (JObject)jsonElement["body"];
+            var values = node["values"].ToString();
+            var valueName = node["valueName"].ToString();
+            var body = (JObject)node["body"];
 
             var @foreach = new ForEach<JObject>()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
 
             @foreach.Values = new CSharpValue<IEnumerable<JObject>>(values);
             var activityAction = new ActivityAction<JObject>();
             activityAction.Argument = new DelegateInArgument<JObject>(valueName);
-            if (body  != null)
+            if (body != null)
             {
                 activityAction.Handler = ParseActivity(body);
             }
@@ -403,41 +407,123 @@ namespace WorkflowCore
             return @foreach;
         }
 
-        private Activity ParseAssign(JObject jsonElement)
+        private Activity ParseAssign(JObject node)
         {
-            var typeArguments = jsonElement["assignType"].ToString();
+            var typeArguments = node["assignType"].ToString();
             var type = MapType(typeArguments);
             var coreMethod = typeof(Json2Xaml).GetMethod(nameof(ParseAssignCore), BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
             coreMethod = coreMethod.MakeGenericMethod(type);
-            return (Activity)coreMethod.Invoke(this, new object[] { jsonElement });
+            return (Activity)coreMethod.Invoke(this, new object[] { node });
         }
 
-        private Activity ParseAssignCore<T>(JObject jsonElement)
+        private Activity ParseAssignCore<T>(JObject node)
         {
             var assign = new Assign<T>()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
-            var to = jsonElement["to"].ToString();
+            var to = node["to"].ToString();
             assign.To = new OutArgument<T>(new CSharpReference<T>(to));
-            var value = jsonElement["value"].ToString();
+            var value = node["value"].ToString();
             assign.Value = new CSharpValue<T>(value);
             return assign;
         }
 
-        private Activity ParseWriteLine(JObject jsonElement)
+        private Activity ParseWriteLine(JObject node)
         {
             var writeLine = new WriteLine()
             {
-                DisplayName = GetDisplayName(jsonElement)
+                DisplayName = GetDisplayName(node)
             };
-            writeLine.Text = new CSharpValue<string>(jsonElement["text"].ToString());
+            writeLine.Text = new CSharpValue<string>(node["text"].ToString());
             return writeLine;
         }
 
-        private string GetDisplayName(JObject jsonElement)
+        private Activity ParseMachineState(JObject machineNode)
         {
-            return jsonElement["displayName"]?.ToString();
+            var machine = new StateMachine();
+            var results = machineNode["states"].Value<JArray>().Select(s => ParseState((JObject)s)).ToDictionary(p => p.Id, p => p);
+            var intialState = machineNode["initialState"].Value<string>();
+
+            machine.InitialState = results[intialState].State;
+            foreach (var variable in ParseVariables(machineNode))
+            {
+                machine.Variables.Add(variable);
+            }
+            machine.DisplayName = GetDisplayName(machineNode);
+            foreach (var result in results.Values)
+            {
+
+                var id = result.Id;
+                var state = result.State;
+                if (result.TransitionsNode != null)
+                {
+                    foreach (JObject transitionNode in result.TransitionsNode)
+                    {
+                        state.Transitions.Add(ParseTransition(transitionNode, results));
+                    }
+                }
+               
+                machine.States.Add(state);
+            }
+            return machine;
+        }
+
+        private class StateParseResult
+        {
+            public string Id { get; set; }
+            public State State { get; set; }
+            public JArray TransitionsNode { get; set; }
+        }
+
+        private StateParseResult ParseState(JObject stateNode)
+        {
+            var id = stateNode["id"].Value<string>();
+            var isFinal = stateNode["isFinal"]?.Value<bool?>() ?? false;
+            var entryNode = stateNode["entry"]?.Value<JObject>();
+            var exitNode = stateNode["exit"]?.Value<JObject>();
+            var state = new State
+            {
+                DisplayName = GetDisplayName(stateNode),
+                Entry = entryNode == null ? null : ParseActivity(entryNode),
+                Exit = exitNode == null ? null : ParseActivity(exitNode),
+                IsFinal = isFinal
+            };
+            foreach (var variable in ParseVariables(stateNode))
+            {
+                state.Variables.Add(variable);
+            }
+
+            return new StateParseResult
+            {
+                Id = id,
+                State = state,
+                TransitionsNode = stateNode["transitions"]?.Value<JArray>()
+            };
+        }
+
+        private Transition ParseTransition(JObject transitionNode, Dictionary<string, StateParseResult> results)
+        {
+            var triggerNode = transitionNode["trigger"]?.Value<JObject>();
+            var actionNode = transitionNode["action"]?.Value<JObject>();
+            var condition = transitionNode["condition"]?.Value<string>();
+            var to = transitionNode["to"]?.Value<string>();
+            var transition = new Transition
+            {
+                DisplayName = GetDisplayName(transitionNode),
+                Trigger = triggerNode == null ? null : ParseActivity(triggerNode),
+                Action = actionNode == null ? null : ParseActivity(actionNode),
+                Condition = condition == null ? null: new CSharpValue<bool>(condition),
+                To = results[to].State
+            };
+
+            return transition;
+        }
+
+
+        private string GetDisplayName(JObject node)
+        {
+            return node["displayName"]?.ToString();
         }
 
 

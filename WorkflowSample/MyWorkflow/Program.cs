@@ -14,7 +14,7 @@ namespace MyWorkflow
     {
         static async Task Main(string[] args)
         {
-            var activity = new Activity1();
+            var activity = new Activity2();
             var app = new WorkflowApplication(activity);
 
 
@@ -39,6 +39,16 @@ namespace MyWorkflow
             Console.ReadLine();
 
             
+        }
+
+        private static Activity CreateCustomActivity()
+        {
+            var stateMachine = new StateMachine()
+            {
+
+            };
+           
+            return stateMachine;
         }
 
         private static string GetConnectionString()
