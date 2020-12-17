@@ -6,6 +6,7 @@
     <e p="C:\Users\yicheng\source\repos\my_workflow\WorkflowSample" t="IncludeFlat">
       <e p="MyWorkflow" t="IncludeRecursive">
         <e p="Activity1.xaml" t="Include" />
+        <e p="Activity2.xaml" t="Include" />
         <e p="app.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="MyWorkflow.csproj" t="IncludeRecursive" />
@@ -15,12 +16,17 @@
               <e p="_MyWorkflow.g.cs" t="Include" />
               <e p="Activity1.g.cs" t="Include" />
               <e p="Activity1.g.xaml" t="Include" />
+              <e p="Activity2.g.cs" t="Include" />
+              <e p="Activity2.g.xaml" t="Include" />
               <e p="InProcessTempFiles" t="Include">
                 <e p="_MyWorkflow.g.cs" t="Include" />
                 <e p="Activity1.g.cs" t="Include" />
+                <e p="Activity2.g.cs" t="Include" />
               </e>
               <e p="MyWorkflow_Activity1_BeforeInitializeComponentHelper.cs" t="Include" />
               <e p="MyWorkflow_Activity1_BeforeInitializeComponentHelper.txt" t="Include" />
+              <e p="MyWorkflow_Activity2_BeforeInitializeComponentHelper.cs" t="Include" />
+              <e p="MyWorkflow_Activity2_BeforeInitializeComponentHelper.txt" t="Include" />
             </e>
           </e>
         </e>
