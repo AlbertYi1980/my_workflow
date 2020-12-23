@@ -3,42 +3,78 @@ using System;
 using System.Activities;
 using System.Activities.DurableInstancing;
 using System.Activities.Statements;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Runtime.DurableInstancing;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyWorkflow
 {
     class Program
     {
-        static async Task Main(string[] args)
+
+        private static Activity1 _activity = new Activity1();    
+        private static AutoResetEvent sync = new AutoResetEvent(false);
+        static void Main(string[] args)
         {
-            var activity = new Activity2();
-            var app = new WorkflowApplication(activity);
 
+            //var appId = StartWorkflow();
 
+            var appId = new Guid("2A0E1FB7-7C5E-45A9-BCBC-AD8EB8DD3198");
+            Resume(appId, "c");
+            //var marks = GetBookemarks(appId);
 
-            app.InstanceStore = GetStore();
-            app.PersistableIdle = eventArgs =>
-            {
-                return PersistableIdleAction.Unload;
-            };
-            app.Run();
-            Console.WriteLine(app.Id);
-            Console.WriteLine(DateTime.Now);
-            await Task.Delay(TimeSpan.FromSeconds(4));
-            Console.WriteLine(DateTime.Now);
+            //foreach(var mark in marks)
+            //{
+            //    Console.WriteLine(mark);
+            //}
 
+            sync.WaitOne();
 
-            //var app2 = new WorkflowApplication(activity);
-            //app2.InstanceStore = GetStore();
-            //app2.Load(app.Id);
-            //app2.ResumeBookmark("input", "{\"data\":{\"name\":\"aaaa\",\"age\":3231}}");
             Console.WriteLine("enter to end..");
             Console.ReadLine();
 
             
+        }
+
+        private static Guid StartWorkflow()
+        {
+             var app = new WorkflowApplication(_activity);
+            app.PersistableIdle = eventArgs => PersistableIdleAction.Unload;
+            app.Unloaded += _ => sync.Set();
+            app.InstanceStore = GetStore();
+            app.Run();
+            Console.WriteLine(app.Id);
+            return app.Id;
+        }
+
+        private static void Resume(Guid appId, string name)
+        {
+            var app = new WorkflowApplication(_activity);
+            app.PersistableIdle = eventArgs => PersistableIdleAction.Unload;
+            app.Unloaded += _ => sync.Set();
+        
+            app.InstanceStore = GetStore();    
+            app.Load(appId);
+            var reuslt =   app.ResumeBookmark(name, $"data:{name}");
+            if (reuslt == BookmarkResumptionResult.NotFound)
+            {
+                app.Unload();
+            }
+        }
+
+        private static IList<string> GetBookemarks(Guid appId)
+        {
+            var app = new WorkflowApplication(_activity);
+            app.PersistableIdle = eventArgs => PersistableIdleAction.Unload;
+            app.Unloaded += _ => sync.Set();
+            app.InstanceStore = GetStore();
+            app.Load(appId);
+            var marks = app.GetBookmarks().Select(b => b.BookmarkName).ToList();
+            app.Unload();
+            return marks;
         }
 
         private static Activity CreateCustomActivity()

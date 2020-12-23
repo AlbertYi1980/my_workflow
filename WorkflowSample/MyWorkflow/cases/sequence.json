@@ -1,0 +1,18 @@
+{
+    "$type": "sequence",
+    "activities": [
+        {
+            "$type": "writeLine",
+            "text": "\"before action.\""
+        },
+        {
+            "$type" : "userTask",
+            "name" : "aaa"
+
+        },
+        {
+            "$type": "writeLine",
+            "text": "\"after action.\""
+        }
+    ]
+}

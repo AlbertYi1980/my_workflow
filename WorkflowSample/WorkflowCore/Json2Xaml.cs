@@ -38,7 +38,6 @@ namespace WorkflowCore
                 Implementation = root,
             };
 
-
             TextExpression.SetReferencesForImplementation(ab, refTypes.Select(t => new AssemblyReference() { Assembly = t.Assembly }).ToList());
             TextExpression.SetNamespacesForImplementation(ab, refTypes.Select(t => t.Namespace).Distinct().ToList());
             var sb = new StringBuilder();
@@ -87,6 +86,12 @@ namespace WorkflowCore
                     return ParseForeach(node);
                 case "assign":
                     return ParseAssign(node);
+                case "pick":
+                    return ParsePick(node);
+                case "parallel":
+                    return ParseParallel(node);
+                case "stateMachine":
+                    return ParseMachineState(node);
                 case "mirrorCreate":
                     return ParseMirrorCreate(node);
                 case "mirrorDelete":
@@ -97,8 +102,7 @@ namespace WorkflowCore
                     return ParseMirrorQuery(node);
                 case "mirrorDetail":
                     return ParseMirrorDetail(node);
-                case "stateMachine":
-                    return ParseMachineState(node);
+             
                 default:
                     throw new NotSupportedException($"type {type} not been supported.");
             }
@@ -518,6 +522,64 @@ namespace WorkflowCore
             };
 
             return transition;
+        }
+
+        private Activity ParsePick(JObject node)
+        {
+            var pick = new Pick();
+            pick.DisplayName = GetDisplayName(node);
+            var branchesNode = node["branches"]?.Value<JArray>();
+            if (branchesNode != null)
+            {
+                foreach(JObject branchNode in branchesNode)
+                {
+                    pick.Branches.Add(ParsePickBranch(branchNode));
+                }
+            }
+            return pick;
+        }
+
+        private PickBranch ParsePickBranch(JObject branchNode)
+        {
+            var  displayName = GetDisplayName(branchNode);
+            var triggerNode =  branchNode["trigger"].Value<JObject>();
+            var actionNode = branchNode["action"]?.Value<JObject>();
+            var branch = new PickBranch
+            {
+                DisplayName = displayName,
+                Trigger = ParseActivity(triggerNode),
+                Action = ParseActivity(actionNode),
+               
+            };
+            foreach (var variable in ParseVariables(branchNode))
+            {
+                branch.Variables.Add(variable);
+            }
+            return branch;
+        }
+
+        private Activity ParseParallel(JObject parallelNode)
+        {
+            var displayName = GetDisplayName(parallelNode);
+            var branchesNode = parallelNode["branches"]?.Value<JArray>();
+            var completionCondition = parallelNode["completionCondition"]?.Value<string>();
+            var parallel = new Parallel()
+            {
+                DisplayName = displayName,
+                CompletionCondition = completionCondition == null ? null : new CSharpValue<bool>(completionCondition),
+            };
+            foreach (var variable in ParseVariables(parallelNode))
+            {
+                parallel.Variables.Add(variable);
+            }
+            if (branchesNode != null)
+            {
+                foreach (JObject branchNode in branchesNode)
+                {
+                    parallel.Branches.Add(ParseActivity(branchNode));
+                }
+            }
+            return parallel;
         }
 
 

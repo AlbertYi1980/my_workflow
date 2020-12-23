@@ -1,0 +1,23 @@
+{
+    "$type": "sequence",
+    "variables": [
+        {
+            "type": "JsonElement",
+            "name": "a"
+        }
+    ],
+    "activities": [
+        {
+            "$type": "mirrorCreate",
+            "mirrorBase": "\"http://localhost:5000/\"",
+            "tenantId": "\"a\"",
+            "modelKey": "\"kkk\"",
+            "args": "JsonSerializer.Deserialize<JsonElement>(\"{\\\"model\\\":{\\\"data\\\":{\\\"a\\\":1,\\\"b\\\":\\\"hello\\\"}}}\",null)",
+            "result": "a"
+        },
+        {
+            "$type": "writeLine",
+            "text": "a.ToString()"
+        }
+    ]
+}

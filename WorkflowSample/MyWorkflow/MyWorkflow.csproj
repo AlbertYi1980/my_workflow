@@ -77,6 +77,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="cases\assign.json" />
+    <None Include="cases\complex.json" />
+    <None Include="cases\foreach.json" />
+    <None Include="cases\if.json" />
+    <None Include="cases\mirror.json" />
+    <None Include="cases\sequence.json" />
+    <None Include="cases\stateMachine.json" />
+    <None Include="cases\switch.json" />
+    <None Include="cases\temp.json" />
+    <None Include="cases\workflowschema.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

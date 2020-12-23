@@ -1,13 +1,18 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MyWorkflow.Activity2" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#"
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MyWorkflow.Activity2"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:wa="clr-namespace:WorkflowCore.Activities;assembly=WorkflowCore"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="aaa" Type="InArgument(x:String)" />
+    <x:Property Name="argument1" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>MyWorkflow.Activity2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System</x:String>
@@ -15,6 +20,7 @@
       <x:String>System.Data</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Text</x:String>
+      <x:String>System.Threading</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -41,70 +47,34 @@
       <AssemblyReference>MyWorkflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine InitialState="{x:Reference __ReferenceID1}">
-    <State x:Name="__ReferenceID1" DisplayName="State1">
-      <State.Transitions>
-        <Transition DisplayName="T1">
-          <Transition.To>
-            <State x:Name="__ReferenceID0" DisplayName="FinalState" IsFinal="True">
-              <State.Entry>
-                <WriteLine Text="this is the end." sap2010:WorkflowViewState.IdRef="WriteLine_1" />
-              </State.Entry>
-              <sap2010:WorkflowViewState.IdRef>State_1</sap2010:WorkflowViewState.IdRef>
-            </State>
-          </Transition.To>
-          <sap2010:WorkflowViewState.IdRef>Transition_1</sap2010:WorkflowViewState.IdRef>
-        </Transition>
-      </State.Transitions>
-      <sap2010:WorkflowViewState.IdRef>State_2</sap2010:WorkflowViewState.IdRef>
-    </State>
-    <x:Reference>__ReferenceID0</x:Reference>
-    <sap2010:WorkflowViewState.IdRef>StateMachine_1</sap2010:WorkflowViewState.IdRef>
-    <sads:DebugSymbol.Symbol>d1JDOlxVc2Vyc1x5aWNoZW5nXHNvdXJjZVxyZXBvc1xteV93b3JrZmxvd1xXb3JrZmxvd1NhbXBsZVxNeVdvcmtmbG93XEFjdGl2aXR5Mi54YW1sBSwDQBICAQEtBTwNAgEGMQ02FQIBAjMRM2QCAQQzITMzAgEF</sads:DebugSymbol.Symbol>
-  </StateMachine>
-  <sap2010:WorkflowViewState.IdRef>MyWorkflow.Activity2_1</sap2010:WorkflowViewState.IdRef>
+  <Pick>
+    <PickBranch DisplayName="Branch1">
+      <PickBranch.Trigger>
+        <wa:UserTask Name="a" sap2010:WorkflowViewState.IdRef="UserTask_1" />
+      </PickBranch.Trigger>
+      <WriteLine Text="action a" sap2010:WorkflowViewState.IdRef="WriteLine_7" />
+      <sap2010:WorkflowViewState.IdRef>PickBranch_1</sap2010:WorkflowViewState.IdRef>
+    </PickBranch>
+    <PickBranch DisplayName="Branch2">
+      <PickBranch.Trigger>
+        <wa:UserTask Name="b" sap2010:WorkflowViewState.IdRef="UserTask_2" />
+      </PickBranch.Trigger>
+      <WriteLine Text="action b" sap2010:WorkflowViewState.IdRef="WriteLine_8" />
+      <sap2010:WorkflowViewState.IdRef>PickBranch_2</sap2010:WorkflowViewState.IdRef>
+    </PickBranch>
+    <sap2010:WorkflowViewState.IdRef>Pick_1</sap2010:WorkflowViewState.IdRef>
+    <sads:DebugSymbol.Symbol>d1JDOlxVc2Vyc1x5aWNoZW5nXHNvdXJjZVxyZXBvc1xteV93b3JrZmxvd1xXb3JrZmxvd1NhbXBsZVxNeVdvcmtmbG93XEFjdGl2aXR5Mi54YW1sCTIDQwoCAQEzBTkSAgEGOgVAEgIBAjUJNU4CAQk3BzdSAgEHPAk8TgIBBT4HPlICAQM3FzchAgEIPhc+IQIBBA==</sads:DebugSymbol.Symbol>
+  </Pick>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="213,63" />
-      <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="326,225">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">193,439.5</av:Point>
-            <av:Size x:Key="ShapeSize">114,61</av:Size>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Transition_1">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">260,310.5 260,340.5 244.3,340.5 244.3,439.5</av:PointCollection>
-            <x:Int32 x:Key="SrcConnectionPointIndex">39</x:Int32>
-            <x:Int32 x:Key="DestConnectionPointIndex">34</x:Int32>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_2" sap:VirtualizedContainerService.HintSize="114,61">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">203,249.5</av:Point>
-            <av:Size x:Key="ShapeSize">114,61</av:Size>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StateMachine_1" sap:VirtualizedContainerService.HintSize="614,636">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
-            <x:Double x:Key="StateContainerWidth">600</x:Double>
-            <x:Double x:Key="StateContainerHeight">600</x:Double>
-            <av:PointCollection x:Key="ConnectorLocation">318,77.5 318,280 317,280</av:PointCollection>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MyWorkflow.Activity2_1" sap:VirtualizedContainerService.HintSize="654,716" />
+      <sap2010:ViewStateData Id="UserTask_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLine_7" sap:VirtualizedContainerService.HintSize="213,63" />
+      <sap2010:ViewStateData Id="PickBranch_1" sap:VirtualizedContainerService.HintSize="243,325" />
+      <sap2010:ViewStateData Id="UserTask_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLine_8" sap:VirtualizedContainerService.HintSize="213,63" />
+      <sap2010:ViewStateData Id="PickBranch_2" sap:VirtualizedContainerService.HintSize="243,325" />
+      <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="640,371" />
+      <sap2010:ViewStateData Id="MyWorkflow.Activity2_1" sap:VirtualizedContainerService.HintSize="680,451" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

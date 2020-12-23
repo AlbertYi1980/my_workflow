@@ -21,7 +21,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="python csharp script" />
+    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="state machine" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,12 +142,13 @@
     <MESSAGE value="my workflow" />
     <MESSAGE value="newton soft replace system.text.json" />
     <MESSAGE value="python csharp script" />
-    <option name="LAST_COMMIT_MESSAGE" value="python csharp script" />
+    <MESSAGE value="state machine" />
+    <option name="LAST_COMMIT_MESSAGE" value="state machine" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1608088454544">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1608173358734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1608088454544" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1608173358734" />
   </component>
 </project>

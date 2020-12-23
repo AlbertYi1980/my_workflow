@@ -1,7 +1,6 @@
 ﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MyWorkflow.Activity1" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="MyWorkflow.Activity1_1"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
@@ -23,80 +22,69 @@
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
       <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Activities.DurableInstancing</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.DurableInstancing</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Workflow.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Workflow.Runtime</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
-      <AssemblyReference>System.Runtime.DurableInstancing</AssemblyReference>
-      <AssemblyReference>System.Activities.DurableInstancing</AssemblyReference>
       <AssemblyReference>WorkflowCore</AssemblyReference>
-      <AssemblyReference>System.Workflow.Runtime</AssemblyReference>
-      <AssemblyReference>System.Workflow.ComponentModel</AssemblyReference>
       <AssemblyReference>WorkflowScripting</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
       <AssemblyReference>MyWorkflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="result" />
-      <Variable x:TypeArguments="x:String" Default="http://localhost:5000" Name="mirrorBase" />
-      <Variable x:TypeArguments="x:String" Default="student" Name="modelKey" />
-      <Variable x:TypeArguments="x:String" Default="1234" Name="tenantId" />
-    </Sequence.Variables>
-    <wa:MirrorDetail sap2010:WorkflowViewState.IdRef="MirrorDetail_1">
-      <wa:MirrorDetail.Filter>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">"{\"id\":\"5fd971cf312892277cf7b3ab\"}"</mca:CSharpValue>
-        </InArgument>
-      </wa:MirrorDetail.Filter>
-      <wa:MirrorDetail.MirrorBase>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">mirrorBase</mca:CSharpValue>
-        </InArgument>
-      </wa:MirrorDetail.MirrorBase>
-      <wa:MirrorDetail.ModelKey>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">modelKey</mca:CSharpValue>
-        </InArgument>
-      </wa:MirrorDetail.ModelKey>
-      <wa:MirrorDetail.Result>
-        <OutArgument x:TypeArguments="x:String">
-          <mca:CSharpReference x:TypeArguments="x:String">result</mca:CSharpReference>
-        </OutArgument>
-      </wa:MirrorDetail.Result>
-      <wa:MirrorDetail.TenantId>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">tenantId</mca:CSharpValue>
-        </InArgument>
-      </wa:MirrorDetail.TenantId>
-    </wa:MirrorDetail>
-    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_6">
-      <InArgument x:TypeArguments="x:String">
-        <mca:CSharpValue x:TypeArguments="x:String">result.ToString()</mca:CSharpValue>
-      </InArgument>
-    </WriteLine>
-    <sads:DebugSymbol.Symbol>d1JDOlxVc2Vyc1x5aWNoZW5nXHNvdXJjZVxyZXBvc1xteV93b3JrZmxvd1xXb3JrZmxvd1NhbXBsZVxNeVdvcmtmbG93XEFjdGl2aXR5MS54YW1sDC8DVw4CAQEyNDJLAgEEMzQzPQIBAzQ0NDoCAQI2BVAXAgELUQVVEQIBBT4LPlMCASA5CzlwAgEbSAtIVwIBFkMLQ1ECARFNC01RAgEMUwlTWAIBBg==</sads:DebugSymbol.Symbol>
+  <Sequence>
+    <Pick>
+      <PickBranch DisplayName="Branch1">
+        <PickBranch.Trigger>
+          <wa:UserTask Name="a" sap2010:WorkflowViewState.IdRef="UserTask_1" />
+        </PickBranch.Trigger>
+        <WriteLine Text="aaaaaaa" sap2010:WorkflowViewState.IdRef="WriteLine_7" />
+        <sap2010:WorkflowViewState.IdRef>PickBranch_1</sap2010:WorkflowViewState.IdRef>
+      </PickBranch>
+      <PickBranch DisplayName="Branch2">
+        <PickBranch.Trigger>
+          <wa:UserTask Name="b" sap2010:WorkflowViewState.IdRef="UserTask_2" />
+        </PickBranch.Trigger>
+        <WriteLine Text="bbbbb" sap2010:WorkflowViewState.IdRef="WriteLine_8" />
+        <sap2010:WorkflowViewState.IdRef>PickBranch_2</sap2010:WorkflowViewState.IdRef>
+      </PickBranch>
+      <sap2010:WorkflowViewState.IdRef>Pick_1</sap2010:WorkflowViewState.IdRef>
+    </Pick>
+    <wa:UserTask Name="c" sap2010:WorkflowViewState.IdRef="UserTask_3" />
+    <WriteLine Text="cccc" sap2010:WorkflowViewState.IdRef="WriteLine_9" />
+    <sap2010:WorkflowViewState.IdRef>Sequence_2</sap2010:WorkflowViewState.IdRef>
+    <sads:DebugSymbol.Symbol>d1JDOlxVc2Vyc1x5aWNoZW5nXHNvdXJjZVxyZXBvc1xteV93b3JrZmxvd1xXb3JrZmxvd1NhbXBsZVxNeVdvcmtmbG93XEFjdGl2aXR5MS54YW1sDS4DRA4CAQEvBT8MAgEFQAVASgIBBEEFQUwCAQIwBzYUAgEKNwc9FAIBBkEVQRsCAQMyCzJQAgENNAk0UwIBCzkLOVACAQk7CTtRAgEHNBk0IgIBDDsZOyACAQg=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="MirrorDetail_1" sap:VirtualizedContainerService.HintSize="213,22" />
-      <sap2010:ViewStateData Id="WriteLine_6" sap:VirtualizedContainerService.HintSize="213,63" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="235,249">
+      <sap2010:ViewStateData Id="UserTask_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLine_7" sap:VirtualizedContainerService.HintSize="213,63" />
+      <sap2010:ViewStateData Id="PickBranch_1" sap:VirtualizedContainerService.HintSize="243,325" />
+      <sap2010:ViewStateData Id="UserTask_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLine_8" sap:VirtualizedContainerService.HintSize="213,63" />
+      <sap2010:ViewStateData Id="PickBranch_2" sap:VirtualizedContainerService.HintSize="243,325" />
+      <sap2010:ViewStateData Id="Pick_1" sap:VirtualizedContainerService.HintSize="640,371" />
+      <sap2010:ViewStateData Id="UserTask_3" sap:VirtualizedContainerService.HintSize="640,22" />
+      <sap2010:ViewStateData Id="WriteLine_9" sap:VirtualizedContainerService.HintSize="640,63" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="662,660">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MyWorkflow.Activity1_1" sap:VirtualizedContainerService.HintSize="275,422" />
+      <sap2010:ViewStateData Id="MyWorkflow.Activity1_1" sap:VirtualizedContainerService.HintSize="702,740" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

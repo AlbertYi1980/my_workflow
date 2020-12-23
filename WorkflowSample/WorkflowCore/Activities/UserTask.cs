@@ -13,14 +13,14 @@ namespace WorkflowCore.Activities
         protected override void Execute(NativeActivityContext context)
         {
              context.CreateBookmark(Name, Callback);
-          
+            System.Console.WriteLine($"bookemark {Name} created");
         }
 
         private void Callback(NativeActivityContext context, Bookmark bookmark, object value)
         {
             context.RemoveBookmark(Name);
             Result.Set(context, (string)value);
-            System.Console.WriteLine("resume");
+            System.Console.WriteLine($"resume bookmark {Name}");
             
         }
     }
