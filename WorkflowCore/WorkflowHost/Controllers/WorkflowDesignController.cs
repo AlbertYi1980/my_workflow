@@ -24,7 +24,7 @@ namespace WorkflowHost.Controllers
         }
 
         [Route("define"), HttpPost]
-        public string Define([FromBody] WorkflowDefinition args)
+        public Guid Define([FromBody] WorkflowDefinition args)
         {
             args.CreatedAt = DateTime.Now;
             _defCollection.InsertOne(args);
@@ -38,7 +38,7 @@ namespace WorkflowHost.Controllers
         }
 
         [Route("remove"), HttpDelete]
-        public void Remove(string id)
+        public void Remove(Guid id)
         {
             JsonSerializer.Deserialize<JsonElement>("{\"a\":1,\"b\":\"dsfdfdf\"}", null);
             _defCollection.DeleteOne(i => i.Id == id);
