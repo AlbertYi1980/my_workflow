@@ -1,0 +1,20 @@
+{
+    "$type": "sequence",
+    "variables": [
+        {
+            "type": "JsonElement",
+            "name": "s"
+        }
+    ],
+    "activities": [
+        {
+            "$type":"userTask",
+            "name":"create",
+            "result":"s"
+        },
+        {
+            "$type": "writeLine",
+            "text": "s.ToString()"
+        }
+    ]
+}

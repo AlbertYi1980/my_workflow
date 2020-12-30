@@ -1,0 +1,10 @@
+{
+    "$type":"if",
+    "displayName":"if",
+    "condition" :"1==1",
+    "then" : {
+        "$type":"trace",
+        "displayName":"trace_me",
+        "text":"\"hello world.\""
+    }
+}

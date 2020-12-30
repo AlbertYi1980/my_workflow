@@ -1,0 +1,23 @@
+{
+    "$type": "sequence",
+    "variables": [
+        {
+            "type": "MyModel.Xxx",
+            "name": "x",
+            "default":"new MyModel.Xxx()"
+        }
+    ],
+    "activities": [
+       
+        {
+            "$type": "assign",
+            "assignType": "string",
+            "to": "x.Yyy",
+            "value": "\"ffffffffffffffff\""
+        },
+        {
+            "$type": "writeLine",
+            "text": "x.Yyy.ToString()"
+        }
+    ]
+}
