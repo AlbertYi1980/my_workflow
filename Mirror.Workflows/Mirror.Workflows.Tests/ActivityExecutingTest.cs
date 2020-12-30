@@ -5,6 +5,7 @@ using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Mirror.Workflows.Activities;
+using Mirror.Workflows.Activities.Parsers;
 using Mirror.Workflows.Tests.Common;
 using Mirror.Workflows.TypeManagement;
 using Xunit;
@@ -22,20 +23,26 @@ namespace Mirror.Workflows.Tests
         [Fact]
         public void RunIf()
         {
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
+           var definition = LoadDefinition("if");
+            var activity = parser.Parse(definition);
+            var compiler = new ActivityCompiler(null, null);
+            compiler.Compile("nnn", "mmmm", activity);
             var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, null, null));
-
-            var definition = LoadDefinition("if");
-            executor.Run("nnn", "mmmm", definition);
+            executor.Run( activity);
         }
         
         [Fact]
         public void RunTrace()
         {
          
-            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, null, null));
-
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
             var definition = LoadDefinition("trace");
-            executor.Run("nnn", "mmmm", definition);
+            var activity = parser.Parse(definition);
+            var compiler = new ActivityCompiler(null, null);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, null, null));
+            executor.Run( activity);
 
          
         }
@@ -54,11 +61,16 @@ namespace MyModel
 }
 ";
             var assemblyName = "t_123_v_1.1";
-         
-            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, assemblyName, code));
-
+            
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
             var definition = LoadDefinition("dynamic");
-            executor.Run("nnn", "mmmm", definition);
+            var activity = parser.Parse(definition);
+            var compiler = new ActivityCompiler(null, null);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, assemblyName, code));
+            executor.Run( activity);
+            
+            executor.Run(activity);
 
         }
 

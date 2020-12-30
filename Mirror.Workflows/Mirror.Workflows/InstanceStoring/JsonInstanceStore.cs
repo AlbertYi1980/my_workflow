@@ -2,8 +2,12 @@
 using System.Activities.DurableInstancing;
 using System.Activities.Runtime.DurableInstancing;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Text.Json;
+using System.Threading;
 using System.Xml.Linq;
+
 // ReSharper disable UnusedParameter.Local
 
 namespace Mirror.Workflows.InstanceStoring
@@ -81,7 +85,8 @@ namespace Mirror.Workflows.InstanceStoring
             else
             {
                 var data = SerializeData(command.InstanceData);
-                var metadata = SerializeMetadata(context.InstanceView.InstanceMetadata, command.InstanceMetadataChanges);
+                var metadata =
+                    SerializeMetadata(context.InstanceView.InstanceMetadata, command.InstanceMetadataChanges);
 
                 _repository.Save(context.InstanceView.InstanceId, new InstanceDataPackage(metadata, data));
 
@@ -142,7 +147,6 @@ namespace Mirror.Workflows.InstanceStoring
 
         #endregion
 
-
         #region serialization
 
         private IDictionary<XName, InstanceValue> Deserialize(string data)
@@ -178,15 +182,16 @@ namespace Mirror.Workflows.InstanceStoring
 
         private static string SerializeMetadata(IDictionary<XName, InstanceValue> states, IDictionary<XName, InstanceValue> changes)
         {
-            var metadata =  new Dictionary<string, InstanceValue>();
+            var metadata = new Dictionary<string, InstanceValue>();
             foreach (var state in states)
             {
                 metadata.Add(state.Key.ToString(), state.Value);
             }
+
             foreach (var change in changes)
             {
                 if (change.Value.Options.HasFlag(InstanceValueOptions.WriteOnly)) continue;
-               
+
                 if (metadata.ContainsKey(change.Key.ToString()))
                 {
                     if (change.Value.IsDeletedValue) metadata.Remove(change.Key.ToString());
@@ -199,6 +204,184 @@ namespace Mirror.Workflows.InstanceStoring
             }
 
             return JsonSerializer.Serialize(metadata);
+        }
+
+        #endregion
+
+        #region private classes
+
+        private abstract class AsyncResult : IAsyncResult
+        {
+            private readonly AsyncCallback _callback;
+            private bool _completedSynchronously;
+            private bool _endCalled;
+            private Exception _exception;
+            private bool _isCompleted;
+            private ManualResetEvent _manualResetEvent;
+
+            protected AsyncResult(AsyncCallback callback, object state)
+            {
+                _callback = callback;
+                AsyncState = state;
+                ThisLock = new object();
+            }
+
+            public object AsyncState { get; }
+
+            public WaitHandle AsyncWaitHandle
+            {
+                get
+                {
+                    if (_manualResetEvent != null)
+                    {
+                        return _manualResetEvent;
+                    }
+
+                    lock (ThisLock)
+                    {
+                        _manualResetEvent ??= new ManualResetEvent(_isCompleted);
+                    }
+
+                    return _manualResetEvent;
+                }
+            }
+
+            public bool CompletedSynchronously => _completedSynchronously;
+
+            public bool IsCompleted => _isCompleted;
+
+            private object ThisLock { get; }
+
+            // Call this version of complete when your asynchronous operation is complete.  This will update the state
+            // of the operation and notify the callback.
+            protected void Complete(bool completedSynchronously)
+            {
+                if (_isCompleted)
+                {
+                    // It is incorrect to call Complete twice.
+                    // throw new InvalidOperationException(Resources.AsyncResultAlreadyCompleted);
+                    throw new InvalidOperationException("AsyncResultAlreadyCompleted");
+                }
+
+                _completedSynchronously = completedSynchronously;
+
+                if (completedSynchronously)
+                {
+                    // If we completedSynchronously, then there is no chance that the manualResetEvent was created so
+                    // we do not need to worry about a race condition.
+                    Debug.Assert(_manualResetEvent == null,
+                        "No ManualResetEvent should be created for a synchronous AsyncResult.");
+                    _isCompleted = true;
+                }
+                else
+                {
+                    lock (ThisLock)
+                    {
+                        _isCompleted = true;
+                        _manualResetEvent?.Set();
+                    }
+                }
+
+                // If the callback throws, the callback implementation is incorrect
+                _callback?.Invoke(this);
+            }
+
+            // Call this version of complete if you raise an exception during processing.  In addition to notifying
+            // the callback, it will capture the exception and store it to be thrown during AsyncResult.End.
+            protected void Complete(bool completedSynchronously, Exception exception)
+            {
+                _exception = exception;
+                Complete(completedSynchronously);
+            }
+
+            // End should be called when the End function for the asynchronous operation is complete.  It
+            // ensures the asynchronous operation is complete, and does some common validation.
+            protected static TAsyncResult End<TAsyncResult>(IAsyncResult result)
+                where TAsyncResult : AsyncResult
+            {
+                if (result == null)
+                {
+                    throw new ArgumentNullException(nameof(result));
+                }
+
+
+                if (!(result is TAsyncResult asyncResult))
+                {
+                    // throw new ArgumentException(Resources.InvalidAsyncResult);
+                    throw new ArgumentException("InvalidAsyncResult");
+                }
+
+                if (asyncResult._endCalled)
+                {
+                    // throw new InvalidOperationException(Resources.AsyncResultAlreadyEnded);
+                    throw new InvalidOperationException("AsyncResultAlreadyEnded");
+                }
+
+                asyncResult._endCalled = true;
+
+                if (!asyncResult._isCompleted)
+                {
+                    asyncResult.AsyncWaitHandle.WaitOne();
+                }
+
+                // was manualResetEvent.Close();
+                asyncResult._manualResetEvent?.Dispose();
+
+                if (asyncResult._exception != null)
+                {
+                    throw asyncResult._exception;
+                }
+
+                return asyncResult;
+            }
+        }
+
+
+        /// <summary>
+        /// A strongly typed AsyncResult.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        private abstract class TypedAsyncResult<T> : AsyncResult
+        {
+            private T _data;
+
+            protected TypedAsyncResult(AsyncCallback callback, object state)
+                : base(callback, state)
+            {
+            }
+
+            public T Data => _data;
+
+            protected void Complete(T data, bool completedSynchronously)
+            {
+                _data = data;
+                Complete(completedSynchronously);
+            }
+
+            protected static T End(IAsyncResult result)
+            {
+                TypedAsyncResult<T> typedResult = AsyncResult.End<TypedAsyncResult<T>>(result);
+                return typedResult.Data;
+            }
+        }
+
+        private class TypedCompletedAsyncResult<T> : TypedAsyncResult<T>
+        {
+            public TypedCompletedAsyncResult(T data, AsyncCallback callback, object state)
+                : base(callback, state)
+            {
+                Complete(data, true);
+            }
+
+            public new static T End(IAsyncResult result)
+            {
+                if (!(result is TypedCompletedAsyncResult<T> completedResult))
+                {
+                    throw new ArgumentException("InvalidAsyncResult");
+                }
+
+                return TypedAsyncResult<T>.End(completedResult);
+            }
         }
 
         #endregion

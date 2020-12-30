@@ -27,9 +27,33 @@
       <e p="Mirror.Workflows" t="IncludeRecursive">
         <e p="Activities" t="Include">
           <e p="ActivityCompiler.cs" t="Include" />
-          <e p="ActivityDescriptor.cs" t="Include" />
           <e p="ActivityExecutor.cs" t="Include" />
-          <e p="ActivityParser.cs" t="Include" />
+          <e p="ActivityManager.cs" t="Include" />
+          <e p="Parsers" t="Include">
+            <e p="ActivityDescriptor.cs" t="Include" />
+            <e p="CompositeActivityParser.cs" t="Include" />
+            <e p="DescriptorContainer.cs" t="Include" />
+            <e p="Descriptors" t="Include">
+              <e p="AssignDescriptor.cs" t="Include" />
+              <e p="DoWhileDescriptor.cs" t="Include" />
+              <e p="ForeachDescriptor.cs" t="Include" />
+              <e p="IfDescriptor.cs" t="Include" />
+              <e p="ParallelDescriptor.cs" t="Include" />
+              <e p="PickDescriptor.cs" t="Include" />
+              <e p="SequenceDescriptor.cs" t="Include" />
+              <e p="StateMachineDescriptor.cs" t="Include" />
+              <e p="SwitchDescriptor.cs" t="Include" />
+              <e p="TraceDescriptor.cs" t="Include" />
+              <e p="UserTaskDescriptor.cs" t="Include" />
+              <e p="WhileDescriptor.cs" t="Include" />
+              <e p="WriteLineDescriptor.cs" t="Include" />
+            </e>
+            <e p="IActivityDescriptor.cs" t="Include" />
+            <e p="IDescriptorProvider.cs" t="Include" />
+            <e p="ParseContext.cs" t="Include" />
+            <e p="ParseHelper.cs" t="Include" />
+            <e p="WellKnownDescriptorContainer.cs" t="Include" />
+          </e>
           <e p="Special" t="Include">
             <e p="Trace.cs" t="Include" />
             <e p="UserTask.cs" t="Include" />
@@ -37,13 +61,10 @@
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="InstanceStoring" t="Include">
-          <e p="AsyncResult.cs" t="Include" />
           <e p="FileInstanceRepository.cs" t="Include" />
           <e p="IInstanceRepository.cs" t="Include" />
           <e p="InstanceDataPackage.cs" t="Include" />
           <e p="JsonInstanceStore.cs" t="Include" />
-          <e p="TypedAsyncResult.cs" t="Include" />
-          <e p="TypedCompletedAsyncResult.cs" t="Include" />
         </e>
         <e p="Mirror.Workflows.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -53,9 +74,17 @@
             </e>
           </e>
         </e>
+        <e p="ResourceScopes" t="Include">
+          <e p="ResourceScope.cs" t="Include" />
+          <e p="ResourceScopeType.cs" t="Include" />
+        </e>
+        <e p="Schemas" t="Include">
+          <e p="JsonSchemaConvertToClass.cs" t="Include" />
+        </e>
         <e p="TypeManagement" t="Include">
           <e p="DynamicModelLoader.cs" t="Include" />
           <e p="ICustomActivityProvider.cs" t="Include" />
+          <e p="ISystemTypeProvider.cs" t="Include" />
           <e p="ITypesProvider.cs" t="Include" />
           <e p="ModelGenerator.cs" t="Include" />
           <e p="TypeContainer.cs" t="Include" />
@@ -77,6 +106,7 @@
       </e>
       <e p="Mirror.Workflows.sln" t="IncludeFlat" />
       <e p="Mirror.Workflows.Tests" t="IncludeRecursive">
+        <e p="a.cs" t="Include" />
         <e p="ActivityExecutingTest.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="cases" t="Include">

@@ -1,4 +1,5 @@
 ﻿using System.Activities;
+using DTrace = System.Diagnostics.Trace;
 
 namespace Mirror.Workflows.Activities.Special
 {
@@ -8,9 +9,9 @@ namespace Mirror.Workflows.Activities.Special
         
         protected override void Execute(NativeActivityContext context)
         {
-            System.Diagnostics.Trace.WriteLine(Text.Get(context));
-            System.Diagnostics.Trace.AutoFlush = true;
-            System.Diagnostics.Trace.Flush();
+           
+            DTrace.WriteLine(Text.Get(context));
+            DTrace.Flush();
         }
 
     }

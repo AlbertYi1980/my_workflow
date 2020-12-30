@@ -39,8 +39,4 @@ namespace MyModel
             var info = provider.Get();
         }
     }
-
-    public class A
-    {
-    }
 }

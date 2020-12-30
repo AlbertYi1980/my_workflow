@@ -2,7 +2,7 @@
 using System.Activities;
 using System.Text.Json;
 
-namespace Mirror.Workflows.Activities
+namespace Mirror.Workflows.Activities.Parsers
 {
     public class ActivityDescriptor
     {
