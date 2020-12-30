@@ -25,55 +25,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26e3b61a-1e87-4078-a80f-882b7aae8dd7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/ActivityExecutingTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/Common/TestTraceTraceListener.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/DynamicLoadingTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/Mirror.Workflows.Tests.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/TypeInfoProviderTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/assign.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/complex.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/dynamic.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/foreach.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/if.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/mirror.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/sequence.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/stateMachine.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/switch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/temp.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/trace.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/workflowschema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityCompiler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityDescriptor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityExecutor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityParser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Special/Trace.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Special/UserTask.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/FileInstanceRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/FileStoreAsyncResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/IInstanceRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/InstanceDataPackage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/JsonInstanceStore.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/TypedAsyncResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/TypedCompletedAsyncResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Mirror.Workflows.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/DynamicModelLoader.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ICustomActivityProvider.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ITypesProvider.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ModelGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/TypeContainer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/TypesInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/TypesInfoProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/WorkflowCore/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/WorkflowCore/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WorkflowSample/.idea/.idea.WorkflowSample/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkflowSample/.idea/.idea.WorkflowSample/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WorkflowSample/.idea/.idea.WorkflowSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkflowSample/.idea/.idea.WorkflowSample/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WorkflowSample/WorkflowSample.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkflowSample/WorkflowSample.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/A.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/DescriptorContainer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/AssignDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/DoWhileDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/ForeachDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/IfDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/ParallelDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/PickDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/SequenceDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/StateMachineDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/SwitchDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/TraceDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/UserTaskDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/WhileDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/Descriptors/WriteLineDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/IActivityDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/IDescriptorProvider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/ParseContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/ParseHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/WellKnownDescriptorContainer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ResourceScopes/ResourceScope.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ResourceScopes/ResourceScopeType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Schemas/JsonSchemaConvertToClass.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ISystemTypeProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/ActivityExecutingTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/ActivityExecutingTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/TypeInfoProviderTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/TypeInfoProviderTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/ActivityDescriptor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/ActivityParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Parsers/CompositeActivityParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Special/Trace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Activities/Special/Trace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/AsyncResult.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/JsonInstanceStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/JsonInstanceStore.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/TypedAsyncResult.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/InstanceStoring/TypedCompletedAsyncResult.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ICustomActivityProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/ICustomActivityProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/TypeContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypeManagement/TypeContainer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkflowCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkflowCore/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
