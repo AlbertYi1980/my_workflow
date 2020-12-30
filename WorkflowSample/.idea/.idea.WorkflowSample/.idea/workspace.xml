@@ -11,6 +11,15 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select>
       <path>
@@ -21,7 +30,46 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="state machine" />
+    <list default="true" id="de1c8e41-94bf-444a-a3b8-ddcba18dcb2e" name="Default Changelist" comment="state machine">
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/ActivityExecutingTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/DynamicLoadingTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/Mirror.Workflows.Tests.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/TestTraceTraceListener.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/TypeInfoProviderTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/assign.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/complex.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/foreach.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/if.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/mirror.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/sequence.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/stateMachine.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/switch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/temp.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/trace.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.Tests/cases/workflowschema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ActivityCompiler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ActivityDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ActivityExecutor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ActivityParser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/DynamicModelLoader.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/ITypesProvider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Mirror.Workflows.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/Trace.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypesInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/TypesInfoProvider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Mirror.Workflows/Mirror.Workflows/UserTask.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WorkflowCore/.vs/WorkflowCore/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkflowCore/.vs/WorkflowCore/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WorkflowSample/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkflowSample.sln" beforeDir="false" afterPath="$PROJECT_DIR$/WorkflowSample.sln" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +79,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/yicheng/source/repos/my_workflow/WorkflowSample/MyWorkflow/Activity1.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D24E2156-3130-4399-84CE-3D7972669024/c9/dae4e8ee/ActivityXamlServices.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D24E2156-3130-4399-84CE-3D7972669024/e7/906bfce2/ActivityXamlServicesSettings.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
