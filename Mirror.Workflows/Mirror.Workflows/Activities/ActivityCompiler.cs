@@ -25,13 +25,16 @@ namespace Mirror.Workflows.Activities
         {
             if (_refAssemblies != null)
             {
-                TextExpression.SetReferences(activity, _refAssemblies.Select(a => new AssemblyReference {Assembly = a}).ToArray());
-                
+                var references = _refAssemblies.Select(a => new AssemblyReference {Assembly = a}).ToArray();
+                TextExpression.SetReferences(activity, references);
+                TextExpression.SetReferencesForImplementation(activity, references);
             }
 
             if (_usingNamespaces != null)
             {
-                  TextExpression.SetNamespaces(activity, _usingNamespaces.ToArray());
+                var namespaces = _usingNamespaces.ToArray();
+                TextExpression.SetNamespaces(activity, namespaces);
+                  TextExpression.SetNamespacesForImplementation(activity, namespaces);
             }
             var settings = new TextExpressionCompilerSettings
             {
@@ -39,7 +42,7 @@ namespace Mirror.Workflows.Activities
                 Language = "C#",
                 ActivityName = activityName,
                 ActivityNamespace = activityNamespace,
-                RootNamespace = null,
+                RootNamespace = "dd",
                 GenerateAsPartialClass = false,
                 AlwaysGenerateSource = true,
                 ForImplementation = false,

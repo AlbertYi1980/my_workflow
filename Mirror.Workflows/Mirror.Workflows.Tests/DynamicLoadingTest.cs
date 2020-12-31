@@ -1,5 +1,5 @@
 using System;
-using Mirror.Workflows.TypeManagement;
+using Mirror.Workflows.Types;
 using Xunit;
 
 namespace Mirror.Workflows.Tests

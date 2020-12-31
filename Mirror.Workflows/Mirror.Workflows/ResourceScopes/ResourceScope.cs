@@ -1,4 +1,4 @@
-﻿namespace Mirror.Workflows.Activities.Scopes
+﻿namespace Mirror.Workflows.ResourceScopes
 {
     /// <summary>
     /// 使用类型域区分系统，全局，各租户的类型

@@ -1,4 +1,4 @@
-﻿namespace Mirror.Workflows.Activities.Scopes
+﻿namespace Mirror.Workflows.ResourceScopes
 {
     public enum ResourceScopeType{
         System,

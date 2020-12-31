@@ -10,6 +10,7 @@ namespace Mirror.Workflows.Tests.Common
 
         public TestTraceTraceListener(ITestOutputHelper outputHelper)
         {
+        
             _outputHelper = outputHelper;
         }
         public override void Write(string message)

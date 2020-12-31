@@ -1,13 +1,13 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Activities;
+using System.Activities.Statements;
 using System.IO;
-using System.Reflection.Metadata;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text.Json;
 using Mirror.Workflows.Activities;
 using Mirror.Workflows.Activities.Parsers;
+using Mirror.Workflows.Activities.Parsers.Descriptors;
+using Mirror.Workflows.Activities.Specials;
 using Mirror.Workflows.Tests.Common;
-using Mirror.Workflows.TypeManagement;
+using Mirror.Workflows.Types;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,25 +23,66 @@ namespace Mirror.Workflows.Tests
         [Fact]
         public void RunIf()
         {
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
            var definition = LoadDefinition("if");
             var activity = parser.Parse(definition);
             var compiler = new ActivityCompiler(null, null);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, null, null));
+            var executor = new ActivityExecutor(null);
             executor.Run( activity);
+        }
+        
+        [Fact]
+        public void RunCustom()
+        {
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
+            var definition = LoadDefinition("custom");
+            
+            var activity = parser.ParseCustom(JsonSerializer.Deserialize<JsonElement>( definition));
+            var compiler = new ActivityCompiler(null, null);
+            compiler.Compile("nnn", "mmmm", activity);
+         
+            var executor = new ActivityExecutor(null);
+            executor.Run( activity);
+        }
+        
+        [Fact]
+        public void RunDynamicActivity()
+        {
+   
+            
+            
+            Activity dynamicWorkflow = new DynamicActivity()  
+            {  
+             
+                Implementation = () => new Sequence()  
+                {  
+                    Activities =
+                    {  
+                        new Trace()  
+                        {  
+                            Text = new InArgument<string>("hfffello")  
+                        }  
+                    }  
+                }  
+            };  
+
+            var executor = new ActivityExecutor(null);
+            executor.Run( dynamicWorkflow);
+   
+  
         }
         
         [Fact]
         public void RunTrace()
         {
          
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
             var definition = LoadDefinition("trace");
             var activity = parser.Parse(definition);
             var compiler = new ActivityCompiler(null, null);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, null, null));
+            var executor = new ActivityExecutor(null);
             executor.Run( activity);
 
          
@@ -62,12 +103,12 @@ namespace MyModel
 ";
             var assemblyName = "t_123_v_1.1";
             
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new TypeContainer());
+            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
             var definition = LoadDefinition("dynamic");
             var activity = parser.Parse(definition);
             var compiler = new ActivityCompiler(null, null);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null, null, new TypesInfoProvider(null, assemblyName, code));
+            var executor = new ActivityExecutor(null);
             executor.Run( activity);
             
             executor.Run(activity);

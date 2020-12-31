@@ -1,0 +1,16 @@
+{
+  "arguments": [
+    {
+      "type": "string",
+      "name": "content1"
+    },
+    {
+      "type": "string",
+      "name": "content2"
+    }
+  ],
+  "implementation": {
+    "$type": "trace",
+    "text": "\"this is then branch.\""
+  }
+}
