@@ -32,8 +32,8 @@
           <e p="Parsers" t="Include">
             <e p="ActivityParseUtil.cs" t="Include" />
             <e p="CompositeActivityParser.cs" t="Include" />
+            <e p="CustomActivityParser.cs" t="Include" />
             <e p="Descriptors" t="Include">
-              <e p="CustomActivityDescriptor.cs" t="Include" />
               <e p="DescriptorContainer.cs" t="Include" />
               <e p="IActivityDescriptor.cs" t="Include" />
               <e p="IDescriptorProvider.cs" t="Include" />
@@ -56,17 +56,15 @@
             </e>
           </e>
           <e p="Specials" t="Include">
-            <e p="Custom.cs" t="Include" />
             <e p="Trace.cs" t="Include" />
             <e p="UserTask.cs" t="Include" />
           </e>
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="InstanceStoring" t="Include">
-          <e p="FileInstanceRepository.cs" t="Include" />
+          <e p="DefaultInstanceStore.cs" t="Include" />
           <e p="IInstanceRepository.cs" t="Include" />
           <e p="InstanceDataPackage.cs" t="Include" />
-          <e p="JsonInstanceStore.cs" t="Include" />
         </e>
         <e p="Mirror.Workflows.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -88,7 +86,6 @@
           <e p="DynamicModelLoader.cs" t="Include" />
           <e p="ITypeInfoProvider.cs" t="Include" />
           <e p="TypeContainer.cs" t="Include" />
-          <e p="TypeNameNormalizer.cs" t="Include" />
           <e p="WellKnownTypeContainer.cs" t="Include" />
         </e>
       </e>
@@ -103,6 +100,18 @@
             </e>
           </e>
         </e>
+      </e>
+      <e p="Mirror.Workflows.Repositories" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Mirror.Workflows.Repositories.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Mirror.Workflows.Repositories.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="StrongTypeJsonFileRepository.cs" t="Include" />
       </e>
       <e p="Mirror.Workflows.sln" t="IncludeFlat" />
       <e p="Mirror.Workflows.Tests" t="IncludeRecursive">
@@ -121,6 +130,7 @@
           <e p="switch.json" t="Include" />
           <e p="temp.json" t="Include" />
           <e p="trace.json" t="Include" />
+          <e p="userTask.json" t="Include" />
           <e p="workflowschema.json" t="Include" />
         </e>
         <e p="Common" t="Include">
@@ -128,7 +138,6 @@
         </e>
         <e p="DynamicLoadingTest.cs" t="Include" />
         <e p="Mirror.Workflows.Tests.csproj" t="IncludeRecursive" />
-        <e p="MsWorkflowTest.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="net5.0" t="Include">

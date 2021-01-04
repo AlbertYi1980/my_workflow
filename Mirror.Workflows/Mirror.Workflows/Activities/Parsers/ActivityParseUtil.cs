@@ -23,26 +23,14 @@ namespace Mirror.Workflows.Activities.Parsers
             if (!exists) yield break;
             foreach (var variableNode in variablesNode.EnumerateArray())
             {
-                var typeText = variableNode.GetProperty("type").GetString();
-                var type = MapType(typeText, typeInfoProvider);
-                var coreMethod = typeof(CompositeActivityParser).GetMethod(nameof(ParseVariableCore),
-                    BindingFlags.Default | BindingFlags.Instance | BindingFlags.NonPublic);
+                var typeName = variableNode.GetProperty("type").GetString();
+                var type = typeInfoProvider.Find(typeName);
+                if (type == null) throw new Exception($"can not find type {typeName}");
+                var coreMethod = typeof(ActivityParseUtil).GetMethod(nameof(ParseVariableCore),
+                    BindingFlags.Default | BindingFlags.Static | BindingFlags.NonPublic);
                 coreMethod = coreMethod!.MakeGenericMethod(type);
                 yield return (Variable) coreMethod.Invoke(null, new object[] {variableNode});
             }
-        }
-        
-        private static Type MapType(string type, ITypeInfoProvider typeInfoProvider)
-        {
-            if (string.IsNullOrWhiteSpace(type)) throw new ArgumentNullException(nameof(type));
-            var typeName = TypeNameNormalizer.Normalize(type);
-            var result = typeInfoProvider.Find(typeName);
-            if (result == null)
-            {
-                throw new NotSupportedException($"can not support type {type}");
-            }
-
-            return result;
         }
 
         private static Variable ParseVariableCore<T>(JsonElement variableNode)
@@ -53,9 +41,8 @@ namespace Mirror.Workflows.Activities.Parsers
             if (defaultNodeExists)
             {
                 var defaultExpression = defaultNode.GetString();
-                variable.Default = new CSharpValue<T>(defaultExpression);
+                variable.Default =   new CSharpValue<T>(defaultExpression);
             }
-
             return variable;
         }
     }

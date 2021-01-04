@@ -1,18 +1,30 @@
 {
     "implementation": {
         "$type": "sequence",
+        "variables": [
+            {
+                "type": "string",
+                "name": "v"
+            }
+            
+        ],
         "activities": [
             {
                 "$type": "trace",
                 "text": "\"before action.\""
             },
             {
-                "$type": "trace",
-                "text": "\"do action.\""
+                "$type": "userTask",
+                "name": "input",
+                "result": "v"
             },
             {
                 "$type": "trace",
                 "text": "\"after action.\""
+            },
+            {
+                "$type": "trace",
+                "text": "v.ToString()"
             }
         ]
     }

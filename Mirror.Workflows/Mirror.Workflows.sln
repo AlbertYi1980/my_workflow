@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Workflows.CustomActi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.MetadataParser", "Mirror.MetadataParser\Mirror.MetadataParser.csproj", "{E908025F-F8D3-4476-8284-7E39D2683E6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Workflows.Repositories", "Mirror.Workflows.Repositories\Mirror.Workflows.Repositories.csproj", "{A069872F-7C44-4D03-864C-C2A968264FB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E908025F-F8D3-4476-8284-7E39D2683E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E908025F-F8D3-4476-8284-7E39D2683E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E908025F-F8D3-4476-8284-7E39D2683E6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A069872F-7C44-4D03-864C-C2A968264FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A069872F-7C44-4D03-864C-C2A968264FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A069872F-7C44-4D03-864C-C2A968264FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A069872F-7C44-4D03-864C-C2A968264FB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

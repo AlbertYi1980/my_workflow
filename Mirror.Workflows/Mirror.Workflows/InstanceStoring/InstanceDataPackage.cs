@@ -1,14 +1,17 @@
-﻿namespace Mirror.Workflows.InstanceStoring
+﻿using System.Activities.Runtime.DurableInstancing;
+using System.Collections.Generic;
+
+namespace Mirror.Workflows.InstanceStoring
 {
     public class InstanceDataPackage
     {
-        public InstanceDataPackage(string metadata, string data)
+        public InstanceDataPackage( IDictionary<string, InstanceValue> metadata,  IDictionary<string, InstanceValue> data)
         {
             Metadata = metadata;
             Data = data;
         }
 
-        public string Metadata { get; }
-        public string Data { get; }
+        public  IDictionary<string, InstanceValue> Metadata { get; }
+        public  IDictionary<string, InstanceValue> Data { get; }
     }
 }

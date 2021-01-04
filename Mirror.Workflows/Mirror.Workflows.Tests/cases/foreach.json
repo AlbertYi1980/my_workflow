@@ -1,9 +1,12 @@
 {
-    "$type":"foreach",
-    "values" :"JsonSerializer.Deserialize<JsonElement>(\"[1,2,3,4]\", null) .EnumerateArray().Select(i => i.GetInt32() + 1)",
-    "valueName" :"a",
-    "body" : {
-        "$type":"writeLine",
-        "text":"a.ToString()"
+    "implementation": {
+        "$type":"foreach",
+        "type": "int",
+        "values" :"new List<int>{1, 2, 3, 4}",
+        "valueName" :"a",
+        "body" : {
+            "$type":"trace",
+            "text":"a.ToString()"
+        }
     }
 }

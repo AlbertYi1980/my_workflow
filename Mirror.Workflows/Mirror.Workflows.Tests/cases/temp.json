@@ -1,23 +1,31 @@
 {
+  "implementation": {
     "$type": "sequence",
     "variables": [
-        {
-            "type": "MyModel.Xxx",
-            "name": "x",
-            "default":"new MyModel.Xxx()"
-        }
+      {
+        "type": "string",
+        "name": "v"
+      }
+
     ],
     "activities": [
-       
-        {
-            "$type": "assign",
-            "assignType": "string",
-            "to": "x.Yyy",
-            "value": "\"ffffffffffffffff\""
-        },
-        {
-            "$type": "writeLine",
-            "text": "x.Yyy.ToString()"
-        }
+      {
+        "$type": "trace",
+        "text": "\"before action.\""
+      },
+      {
+        "$type": "userTask",
+        "name": "input",
+        "result": "v"
+      },
+      {
+        "$type": "trace",
+        "text": "\"after action.\""
+      },
+      {
+        "$type": "trace",
+        "text": "v.ToString()"
+      }
     ]
+  }
 }

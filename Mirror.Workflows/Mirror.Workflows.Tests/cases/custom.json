@@ -9,8 +9,11 @@
       "name": "content2"
     }
   ],
+  "result": {
+    "type": "string"
+  },
   "implementation": {
     "$type": "trace",
-    "text": "\"this is then branch.\""
+    "text": "content1"
   }
 }

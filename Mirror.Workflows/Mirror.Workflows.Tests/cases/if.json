@@ -1,15 +1,20 @@
 {
-  "$type": "if",
-  "displayName": "if",
-  "condition": "1==2",
-  "then": {
-    "$type": "trace",
-    "displayName": "writeLine",
-    "text": "\"this is then branch.\""
-  },
-  "else": {
-    "$type": "trace",
-    "displayName": "writeLine",
-    "text": "\"this is else branch.\""
+  
+  "implementation":
+  {
+    "$type": "if",
+    "displayName": "if",
+    "condition": "1==1",
+    "then": {
+      "$type": "trace",
+      "displayName": "writeLine",
+      "text": "\"this is then branch.\""
+    },
+    "else": {
+      "$type": "trace",
+      "displayName": "writeLine",
+      "text": "\"this is else branch.\""
+    }
   }
+
 }

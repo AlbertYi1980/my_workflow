@@ -1,17 +1,18 @@
 {
+  "implementation": {
     "$type": "sequence",
     "variables": [
-        {
-            "type": "Xxx",
-            "name": "a",
-            "default":"new Xxx{Yyy=\"i am default xxx.yyy.\"}"
-        }
+      {
+        "type": "Xxx",
+        "name": "a",
+        "default": "new Xxx{Yyy=\"i am default xxx.yyy.\"}"
+      }
     ],
     "activities": [
-     
-        {
-            "$type": "trace",
-            "text": "a.Yyy.ToString()"
-        }
+      {
+        "$type": "trace",
+        "text": "a.Yyy.ToString()"
+      }
     ]
+  }
 }

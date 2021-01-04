@@ -1,26 +1,48 @@
 {
-    "$type" :"stateMachine",
-    "initialState" :"waitingFirstCheck",
-    "states":[
-        {
-            "id" : "waitingFirstCheck",
-            "transitions":[
-                { 
-                    "to" : "waitingSecondCheck"
-                }
-            ]
+  "implementation": {
+    "$type": "stateMachine",
+    "initialState": "waitingFirstCheck",
+    "states": [
+      {
+        "id": "waitingFirstCheck",
+        "entry": {
+          "$type":"trace",
+          "text": "\"waiting for first check\""
         },
-        {
-            "id" : "waitingSecondCheck",
-            "transitions":[
-                { 
-                    "to" : "passed"
-                }
-            ]
+        "transitions": [
+          {
+            "to": "waitingSecondCheck",
+            "action":  {
+              "$type":"trace",
+              "text": "\"jumping to second check\""
+            }
+          }
+        ]
+      },
+      {
+        "id": "waitingSecondCheck",
+        "entry": {
+          "$type":"trace",
+          "text": "\"waiting for second check\""
         },
-        {
-            "id" : "passed",
-            "isFinal" : true
-        }
+        "transitions": [
+          {
+            "to": "passed",
+            "action":  {
+              "$type":"trace",
+              "text": "\"jumping to passed state\""
+            }
+          }
+        ]
+      },
+      {
+        "id": "passed",
+        "entry": {
+          "$type":"trace",
+          "text": "\"already passed\""
+        },
+        "isFinal": true
+      }
     ]
+  }
 }

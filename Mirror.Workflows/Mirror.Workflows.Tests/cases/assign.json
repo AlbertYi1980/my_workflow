@@ -1,26 +1,28 @@
 {
+  "implementation": {
     "$type": "sequence",
     "variables": [
-        {
-            "type": "int",
-            "name": "a",
-            "default":"0"
-        }
+      {
+        "type": "int",
+        "name": "a",
+        "default": "0"
+      }
     ],
     "activities": [
-        {
-            "$type": "writeLine",
-            "text": "a.ToString()"
-        },
-        {
-            "$type": "assign",
-            "assignType": "int",
-            "to": "a",
-            "value": "1"
-        },
-        {
-            "$type": "writeLine",
-            "text": "a.ToString()"
-        }
+      {
+        "$type": "trace",
+        "text": "a.ToString()"
+      },
+      {
+        "$type": "assign",
+        "type": "int",
+        "to": "a",
+        "value": "1"
+      },
+      {
+        "$type": "trace",
+        "text": "a.ToString()"
+      }
     ]
+  }
 }

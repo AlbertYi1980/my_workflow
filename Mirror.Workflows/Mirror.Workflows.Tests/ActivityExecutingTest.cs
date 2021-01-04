@@ -1,11 +1,10 @@
-﻿using System.Activities;
-using System.Activities.Statements;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Mirror.Workflows.Activities;
 using Mirror.Workflows.Activities.Parsers;
 using Mirror.Workflows.Activities.Parsers.Descriptors;
-using Mirror.Workflows.Activities.Specials;
+using Mirror.Workflows.InstanceStoring;
 using Mirror.Workflows.Tests.Common;
 using Mirror.Workflows.Types;
 using Xunit;
@@ -19,75 +18,159 @@ namespace Mirror.Workflows.Tests
         {
             System.Diagnostics.Trace.Listeners.Add(new TestTraceTraceListener(outputHelper));
         }
-        
+
         [Fact]
         public void RunIf()
         {
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
-           var definition = LoadDefinition("if");
-            var activity = parser.Parse(definition);
-            var compiler = new ActivityCompiler(null, null);
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("if");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var executor = new ActivityExecutor(null);
-            executor.Run( activity);
+            executor.Run(activity);
         }
-        
+
+        [Fact]
+        public void RunSequence()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("sequence");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+
+        [Fact]
+        public void RunSwitch()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("switch");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+
+        [Fact]
+        public void RunForeach()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("foreach");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+
+        [Fact]
+        public void RunStateMachine()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("stateMachine");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+
+        [Fact]
+        public void RunAssign()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("assign");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+
         [Fact]
         public void RunCustom()
         {
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
             var definition = LoadDefinition("custom");
-            
-            var activity = parser.ParseCustom(JsonSerializer.Deserialize<JsonElement>( definition));
-            var compiler = new ActivityCompiler(null, null);
+
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-         
-            var executor = new ActivityExecutor(null);
-            executor.Run( activity);
-        }
-        
-        [Fact]
-        public void RunDynamicActivity()
-        {
-   
-            
-            
-            Activity dynamicWorkflow = new DynamicActivity()  
-            {  
-             
-                Implementation = () => new Sequence()  
-                {  
-                    Activities =
-                    {  
-                        new Trace()  
-                        {  
-                            Text = new InArgument<string>("hfffello")  
-                        }  
-                    }  
-                }  
-            };  
 
             var executor = new ActivityExecutor(null);
-            executor.Run( dynamicWorkflow);
-   
-  
+            executor.Run(activity, new Dictionary<string, object>() {{"content1", "we win"}});
         }
-        
+
+
         [Fact]
         public void RunTrace()
         {
-         
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
             var definition = LoadDefinition("trace");
-            var activity = parser.Parse(definition);
-            var compiler = new ActivityCompiler(null, null);
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var executor = new ActivityExecutor(null);
-            executor.Run( activity);
-
-         
-        }
+            executor.Run(activity);
+        }    
         
+        
+        [Fact]
+        public void RunTemp()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("temp");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
+            var executor = new ActivityExecutor(store);
+            var appId = executor.Run(activity);
+
+            var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
+        }    
+
+
+        [Fact]
+        public void RunUserTask()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("userTask");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
+            var executor = new ActivityExecutor(store);
+            var appId = executor.Run(activity);
+
+            var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
+           
+        }
+
         [Fact]
         public void RunDynamic()
         {
@@ -102,20 +185,24 @@ namespace MyModel
 }
 ";
             var assemblyName = "t_123_v_1.1";
-            
-            var parser = new CompositeActivityParser(new WellKnownDescriptorContainer(), new WellKnownTypeContainer());
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+
+            var customActivityParser = new CustomActivityParser(new WellKnownDescriptorContainer(), typeContainer);
             var definition = LoadDefinition("dynamic");
-            var activity = parser.Parse(definition);
-            var compiler = new ActivityCompiler(null, null);
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var executor = new ActivityExecutor(null);
-            executor.Run( activity);
-            
             executor.Run(activity);
-
         }
 
-   
 
         private string LoadDefinition(string name)
         {

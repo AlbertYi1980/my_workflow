@@ -12,11 +12,11 @@ using System.Xml.Linq;
 
 namespace Mirror.Workflows.InstanceStoring
 {
-    public class JsonInstanceStore : InstanceStore
+    public class DefaultInstanceStore : InstanceStore
     {
         private readonly IInstanceRepository _repository;
 
-        public JsonInstanceStore(IInstanceRepository repository)
+        public DefaultInstanceStore(IInstanceRepository repository)
         {
             _repository = repository;
         }
@@ -149,9 +149,9 @@ namespace Mirror.Workflows.InstanceStoring
 
         #region serialization
 
-        private IDictionary<XName, InstanceValue> Deserialize(string data)
+        private IDictionary<XName, InstanceValue> Deserialize(IDictionary<string, InstanceValue> serializableInstanceData)
         {
-            var serializableInstanceData = JsonSerializer.Deserialize<Dictionary<string, InstanceValue>>(data);
+            
 
 
             var destination = new Dictionary<XName, InstanceValue>();
@@ -164,7 +164,7 @@ namespace Mirror.Workflows.InstanceStoring
             return destination;
         }
 
-        private string SerializeData(IDictionary<XName, InstanceValue> source)
+        private  IDictionary<string, InstanceValue> SerializeData(IDictionary<XName, InstanceValue> source)
         {
             var scratch = new Dictionary<string, InstanceValue>();
             foreach (var property in source)
@@ -177,12 +177,12 @@ namespace Mirror.Workflows.InstanceStoring
                 }
             }
 
-            return JsonSerializer.Serialize(scratch);
+            return scratch;
         }
 
-        private static string SerializeMetadata(IDictionary<XName, InstanceValue> states, IDictionary<XName, InstanceValue> changes)
+        private static IDictionary<string, InstanceValue> SerializeMetadata(IDictionary<XName, InstanceValue> states, IDictionary<XName, InstanceValue> changes)
         {
-            var metadata = new Dictionary<string, InstanceValue>();
+            IDictionary<string, InstanceValue> metadata = new Dictionary<string, InstanceValue>();
             foreach (var state in states)
             {
                 metadata.Add(state.Key.ToString(), state.Value);
@@ -203,7 +203,7 @@ namespace Mirror.Workflows.InstanceStoring
                 }
             }
 
-            return JsonSerializer.Serialize(metadata);
+            return metadata;
         }
 
         #endregion

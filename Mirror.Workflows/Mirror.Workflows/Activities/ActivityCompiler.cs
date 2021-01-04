@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Activities;
 using System.Activities.Expressions;
+using System.Activities.Statements;
 using System.Activities.XamlIntegration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mirror.Workflows.Types;
 using UiPath.Workflow;
 
 namespace Mirror.Workflows.Activities
@@ -13,29 +15,42 @@ namespace Mirror.Workflows.Activities
     {
         private readonly IEnumerable<Assembly> _refAssemblies;
         private readonly IEnumerable<string> _usingNamespaces;
-        
-        
-        public ActivityCompiler(IEnumerable<Assembly> refAssemblies, IEnumerable<string> usingNamespaces)
+
+
+        public ActivityCompiler(ITypeInfoProvider typeInfoProvider)
         {
-            _refAssemblies = refAssemblies;
-            _usingNamespaces = usingNamespaces;
+            _refAssemblies = typeInfoProvider.ListAssemblies();
+            _usingNamespaces = typeInfoProvider.ListNamespaces();
         }
 
-        public void Compile(string activityNamespace, string activityName, Activity activity)
+        public void Compile(string activityNamespace, string activityName, Activity activity, bool forImplementation = true)
         {
             if (_refAssemblies != null)
             {
                 var references = _refAssemblies.Select(a => new AssemblyReference {Assembly = a}).ToArray();
-                TextExpression.SetReferences(activity, references);
-                TextExpression.SetReferencesForImplementation(activity, references);
+                if (!forImplementation)
+                {
+                    TextExpression.SetReferences(activity, references);
+                }
+                else
+                {
+                    TextExpression.SetReferencesForImplementation(activity, references);
+                }
             }
 
             if (_usingNamespaces != null)
             {
                 var namespaces = _usingNamespaces.ToArray();
-                TextExpression.SetNamespaces(activity, namespaces);
-                  TextExpression.SetNamespacesForImplementation(activity, namespaces);
+                if (!forImplementation)
+                {
+                    TextExpression.SetNamespaces(activity, namespaces);
+                }
+                else
+                {
+                    TextExpression.SetNamespacesForImplementation(activity, namespaces);
+                }
             }
+
             var settings = new TextExpressionCompilerSettings
             {
                 Activity = activity,
@@ -44,8 +59,8 @@ namespace Mirror.Workflows.Activities
                 ActivityNamespace = activityNamespace,
                 RootNamespace = "dd",
                 GenerateAsPartialClass = false,
-                AlwaysGenerateSource = true,
-                ForImplementation = false,
+                AlwaysGenerateSource = false,
+                ForImplementation = forImplementation,
                 Compiler = new CSharpAheadOfTimeCompiler(),
             };
             var results = new TextExpressionCompiler(settings).Compile();
@@ -53,8 +68,20 @@ namespace Mirror.Workflows.Activities
             {
                 throw new Exception("Compilation failed.");
             }
-            var compiledExpressionRoot = Activator.CreateInstance(results.ResultType, activity) as ICompiledExpressionRoot;
-            CompiledExpressionInvoker.SetCompiledExpressionRoot(activity, compiledExpressionRoot);
+            
+
+            if (results.ResultType == null) return;
+            var compiledExpressionRoot =
+                Activator.CreateInstance(results.ResultType, activity) as ICompiledExpressionRoot;
+
+            if (!forImplementation)
+            {
+                CompiledExpressionInvoker.SetCompiledExpressionRoot(activity, compiledExpressionRoot);
+            }
+            else
+            {
+                CompiledExpressionInvoker.SetCompiledExpressionRootForImplementation(activity, compiledExpressionRoot);
+            }
         }
     }
 }

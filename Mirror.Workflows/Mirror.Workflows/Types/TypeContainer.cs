@@ -17,13 +17,14 @@ namespace Mirror.Workflows.Types
             _types = new ConcurrentDictionary<string, Type>();
         }
 
-        public bool Add(string name, Type type)
+        public bool Add( Type type)
         {
-            return _types.TryAdd(name, type);
+            return _types.TryAdd(type.Name, type);
         }
 
         public Type Find(string name)
         {
+    
             var type = _parent?.Find(name);
             if (type != null) return type;
             return _types.TryGetValue(name, out type) ? type : null;
@@ -44,5 +45,7 @@ namespace Mirror.Workflows.Types
             if (parentAssemblies == null) return currentAssemblies;
             return parentAssemblies.Union(currentAssemblies);
         }
+
+   
     }
 }
