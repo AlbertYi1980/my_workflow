@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Mirror.Workflows.CustomActivities\Mirror.Workflows.CustomActivities.csproj" />
       <ProjectReference Include="..\Mirror.Workflows.Repositories\Mirror.Workflows.Repositories.csproj" />
       <ProjectReference Include="..\Mirror.Workflows\Mirror.Workflows.csproj" />
     </ItemGroup>

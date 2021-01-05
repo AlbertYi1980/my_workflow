@@ -1,0 +1,20 @@
+{
+  "arguments": [
+    {
+      "type": "string",
+      "name": "a"
+    }
+
+  ],
+  "implementation": {
+    "$type": "sequence",
+    
+    "activities": [
+     
+      {
+        "$type": "trace",
+        "text": "a.ToString()"
+      }
+    ]
+  }
+}

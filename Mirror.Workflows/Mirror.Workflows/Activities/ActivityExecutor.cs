@@ -8,11 +8,11 @@ using Activity = System.Activities.Activity;
 
 namespace Mirror.Workflows.Activities
 {
-    public class ActivityExecuto
+    public class ActivityExecutor
     {
         private readonly InstanceStore _store;
 
-        public ActivityExecuto(InstanceStore store)
+        public ActivityExecutor(InstanceStore store)
         {
             _store = store;
         }

@@ -4,7 +4,9 @@ using System.Text.Json;
 using Mirror.Workflows.Activities;
 using Mirror.Workflows.Activities.Parsers;
 using Mirror.Workflows.Activities.Parsers.Descriptors;
+using Mirror.Workflows.CustomActivities.Descriptors;
 using Mirror.Workflows.InstanceStoring;
+using Mirror.Workflows.Repositories;
 using Mirror.Workflows.Tests.Common;
 using Mirror.Workflows.Types;
 using Xunit;
@@ -29,7 +31,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -43,7 +45,24 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+        }
+        
+        
+        
+        [Fact]
+        public void RunCSharp()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new CSharpDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, wellKnownTypeContainer);
+            var definition = LoadDefinition("csharp");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -57,7 +76,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -71,7 +90,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -85,7 +104,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -99,7 +118,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 
@@ -115,7 +134,7 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
 
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity, new Dictionary<string, object>() {{"content1", "we win"}});
         }
 
@@ -130,9 +149,44 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
+        }   
+        
+        
+        [Fact]
+        public void RunArguments()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("arguments");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            var appId = executor.Run(activity, new Dictionary<string, object>{ {"a","kknd"}});
+
         }    
+
+        
+        
+        [Fact]
+        public void RunVariables()
+        {
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var customActivityParser =
+                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            var definition = LoadDefinition("variables");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            var appId = executor.Run(activity);
+
+        }    
+
+
         
         
         [Fact]
@@ -146,15 +200,15 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
-            var executor = new ActivityExecuto(store);
-            var appId = executor.Run(activity);
+            var executor = new ActivityExecutor(null);
+            var appId = executor.Run(activity, new Dictionary<string, object>{ {"v","kknd"}});
 
-            var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
+            // var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
         }    
 
 
         [Fact]
-        public void RunUserTask()
+        public void  RunUserTask()
         {
             var wellKnownTypeContainer = new WellKnownTypeContainer();
             var customActivityParser =
@@ -164,9 +218,10 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
-            var executor = new ActivityExecuto(store);
+            // var store = new FileInstanceStore("e:\\workflow-instances");
+            var executor = new ActivityExecutor(null);
             var appId = executor.Run(activity);
-
+            
             var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
            
         }
@@ -199,7 +254,7 @@ namespace MyModel
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(typeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecuto(null);
+            var executor = new ActivityExecutor(null);
             executor.Run(activity);
         }
 

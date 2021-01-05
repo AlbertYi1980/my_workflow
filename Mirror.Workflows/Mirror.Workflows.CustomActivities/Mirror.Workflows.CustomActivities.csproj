@@ -3,9 +3,15 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
-
     <ItemGroup>
-      <Folder Include="MirrorCrud" />
+        <PackageReference Include="UiPath.Workflow" Version="1.0.0-20201210-01" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="MirrorCrud" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Mirror.Workflows.Scripts\Mirror.Workflows.Scripts.csproj" />
+      <ProjectReference Include="..\Mirror.Workflows\Mirror.Workflows.csproj" />
     </ItemGroup>
 
 </Project>

@@ -86,8 +86,7 @@ namespace Mirror.Workflows.InstanceStoring
             }
             else
             {
-              var foo =   command.InstanceData.Values.Skip(2).First().Value.GetType();
-                
+             
                 var data = SerializeData(command.InstanceData);
                 var metadata = SerializeMetadata(context.InstanceView.InstanceMetadata, command.InstanceMetadataChanges);
 
@@ -167,7 +166,7 @@ namespace Mirror.Workflows.InstanceStoring
             return destination;
         }
 
-        private  IDictionary<string, InstanceValue> SerializeData(IDictionary<XName, InstanceValue> source)
+        private  Dictionary<string, InstanceValue> SerializeData(IDictionary<XName, InstanceValue> source)
         {
             var scratch = new Dictionary<string, InstanceValue>();
             foreach (var property in source)
@@ -183,9 +182,9 @@ namespace Mirror.Workflows.InstanceStoring
             return scratch;
         }
 
-        private static IDictionary<string, InstanceValue> SerializeMetadata(IDictionary<XName, InstanceValue> states, IDictionary<XName, InstanceValue> changes)
+        private static Dictionary<string, InstanceValue> SerializeMetadata(IDictionary<XName, InstanceValue> states, IDictionary<XName, InstanceValue> changes)
         {
-            IDictionary<string, InstanceValue> metadata = new Dictionary<string, InstanceValue>();
+            Dictionary<string, InstanceValue> metadata = new Dictionary<string, InstanceValue>();
             foreach (var state in states)
             {
                 metadata.Add(state.Key.ToString(), state.Value);

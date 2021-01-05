@@ -1,0 +1,26 @@
+{
+  
+  "implementation": {
+    "$type": "sequence",
+    "variables": [
+      {
+        "type": "int",
+        "name": "v"
+      }
+
+    ],
+    "activities": [
+      {
+        "$type": "assign",
+        "type": "int",
+        "to": "v",
+        "value": "1299999999"
+      },
+    
+      {
+        "$type": "trace",
+        "text": "v.ToString()"
+      }
+    ]
+  }
+}

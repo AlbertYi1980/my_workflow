@@ -3,26 +3,50 @@ using System.Activities;
 using System.Activities.Runtime.DurableInstancing;
 using System.Collections.Generic;
 using System.IO;
-using Mirror.Workflows.Activities;
-using Newtonsoft.Json;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using Mirror.Workflows.InstanceStoring;
 
-namespace Mirror.Workflows.InstanceStoring
+
+namespace Mirror.Workflows.Repositories
 {
     public  class StrongTypeJsonFileRepository : IInstanceRepository
     {
         private readonly string _baseDir;
-        private readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
+        private readonly List<Type> _knownTypes = new List<Type>();
+
+        private void InitializeKnownTypes(IEnumerable<Type> knownTypesForDataContractSerializer)
         {
-            TypeNameHandling = TypeNameHandling.Auto,
-            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-            ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-            ObjectCreationHandling = ObjectCreationHandling.Replace,
-            PreserveReferencesHandling = PreserveReferencesHandling.Objects
-        };
+
+
+            Assembly sysActivitiesAssembly = typeof(Activity).GetTypeInfo().Assembly;
+            Type[] typesArray = sysActivitiesAssembly.GetTypes();
+
+            // Remove types that are not decorated with a DataContract attribute
+            foreach (Type t in typesArray)
+            {
+                TypeInfo typeInfo = t.GetTypeInfo();
+                if (typeInfo.GetCustomAttribute<DataContractAttribute>() != null)
+                {
+                    _knownTypes.Add(t);
+                }
+            }
+
+            if (knownTypesForDataContractSerializer != null)
+            {
+                foreach (Type knownType in knownTypesForDataContractSerializer)
+                {
+                    _knownTypes.Add(knownType);
+                }
+            }
+        }
+        
         public StrongTypeJsonFileRepository(string baseDir)
         {
             _baseDir = baseDir;
             Directory.CreateDirectory(baseDir);
+            InitializeKnownTypes(null);
         }
 
         private string GetDataPath(Guid id)
@@ -58,19 +82,36 @@ namespace Mirror.Workflows.InstanceStoring
             File.Delete(GetMetadataPath(id));
         }
         
-        private string Serialize(IDictionary<string, InstanceValue> obj)
+        private string Serialize(Dictionary<string, InstanceValue> obj)
         {
-            return JsonConvert.SerializeObject( obj, _jsonSerializerSettings);
+            var settings = new DataContractSerializerSettings
+            {
+                PreserveObjectReferences = true,
+                KnownTypes = _knownTypes
+            };
+            var serializer = new DataContractSerializer(typeof(Dictionary<string, InstanceValue>), settings);
+            using var stream = new MemoryStream();
+      
+            serializer.WriteObject(stream, obj);
+            return Convert.ToBase64String(stream.GetBuffer());
         }
-        private Dictionary<string, InstanceValue> Deserialize(string json)
+        private Dictionary<string, InstanceValue> Deserialize(string s)
         {
             try
-            {
-                return JsonConvert.DeserializeObject<Dictionary<string, InstanceValue>>( json, _jsonSerializerSettings);
+            {  
+                
+                DataContractSerializerSettings settings = new DataContractSerializerSettings
+                {
+                    PreserveObjectReferences = true,
+                    KnownTypes = _knownTypes
+                };
+                var serializer = new DataContractSerializer(typeof(Dictionary<string, InstanceValue>), settings);
+                using var stream = new MemoryStream(Convert.FromBase64String(s));
+                return (Dictionary<string, InstanceValue>) serializer.ReadObject(stream);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+          
                 throw;
             }
         }

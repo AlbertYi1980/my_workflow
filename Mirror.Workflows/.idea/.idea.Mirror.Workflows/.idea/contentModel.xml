@@ -27,9 +27,10 @@
       <e p="Mirror.Workflows" t="IncludeRecursive">
         <e p="Activities" t="Include">
           <e p="ActivityCompiler.cs" t="Include" />
-          <e p="ActivityExecuto.cs" t="Include" />
+          <e p="ActivityExecutor.cs" t="Include" />
           <e p="ActivityManager.cs" t="Include" />
           <e p="Parsers" t="Include">
+            <e p="ActivityDescriptorBase.cs" t="Include" />
             <e p="ActivityParseUtil.cs" t="Include" />
             <e p="CompositeActivityParser.cs" t="Include" />
             <e p="CustomActivityParser.cs" t="Include" />
@@ -54,6 +55,7 @@
               </e>
               <e p="WellKnownDescriptorContainer.cs" t="Include" />
             </e>
+            <e p="IMyActivityDescriptor.cs" t="Include" />
           </e>
           <e p="Specials" t="Include">
             <e p="Trace.cs" t="Include" />
@@ -65,6 +67,13 @@
           <e p="DefaultInstanceStore.cs" t="Include" />
           <e p="IInstanceRepository.cs" t="Include" />
           <e p="InstanceDataPackage.cs" t="Include" />
+          <e p="TestFileInstanceStore" t="Include">
+            <e p="AsyncResult.cs" t="Include" />
+            <e p="TestFileInstanceStore.cs" t="Include" />
+            <e p="TestFileInstanceStore.csproj" t="Include" />
+            <e p="TypedAsyncResult.cs" t="Include" />
+            <e p="TypedCompletedAsyncResult.cs" t="Include" />
+          </e>
         </e>
         <e p="Mirror.Workflows.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -91,6 +100,9 @@
       </e>
       <e p="Mirror.Workflows.CustomActivities" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Descriptors" t="Include">
+          <e p="CSharpDescriptor.cs" t="Include" />
+        </e>
         <e p="Mirror.Workflows.CustomActivities.csproj" t="IncludeRecursive" />
         <e p="MirrorCrud" t="Include" />
         <e p="obj" t="ExcludeRecursive">
@@ -99,6 +111,9 @@
               <e p="Mirror.Workflows.CustomActivities.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="CSharpScript.cs" t="Include" />
         </e>
       </e>
       <e p="Mirror.Workflows.Repositories" t="IncludeRecursive">
@@ -112,14 +127,30 @@
           </e>
         </e>
         <e p="StrongTypeJsonFileRepository.cs" t="Include" />
+        <e p="StrongTypeJsonFileRepository1.cs" t="Include" />
+      </e>
+      <e p="Mirror.Workflows.Scripts" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CSharpExecutor.cs" t="Include" />
+        <e p="Mirror.Workflows.Scripts.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Mirror.Workflows.Scripts.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PythonExecutor.cs" t="Include" />
       </e>
       <e p="Mirror.Workflows.sln" t="IncludeFlat" />
       <e p="Mirror.Workflows.Tests" t="IncludeRecursive">
         <e p="ActivityExecutingTest.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="cases" t="Include">
+          <e p="arguments.json" t="Include" />
           <e p="assign.json" t="Include" />
           <e p="complex.json" t="Include" />
+          <e p="csharp.json" t="Include" />
           <e p="custom.json" t="Include" />
           <e p="dynamic.json" t="Include" />
           <e p="foreach.json" t="Include" />
@@ -131,6 +162,7 @@
           <e p="temp.json" t="Include" />
           <e p="trace.json" t="Include" />
           <e p="userTask.json" t="Include" />
+          <e p="variables.json" t="Include" />
           <e p="workflowschema.json" t="Include" />
         </e>
         <e p="Common" t="Include">
@@ -145,6 +177,7 @@
             </e>
           </e>
         </e>
+        <e p="SerializationTest.cs" t="Include" />
         <e p="TypeInfoProviderTest.cs" t="Include" />
       </e>
       <e p="packages" t="ExcludeRecursive" />

@@ -1,0 +1,28 @@
+{
+  
+  "implementation": {
+    "$type": "sequence",
+    "variables": [
+      {
+        "type": "int",
+        "name": "v"
+      }
+
+    ],
+    "activities": [
+      {
+        "$type": "c#",
+        "inType": "string",
+        "outType": "int",
+        "arguments": "\"12323\"",
+        "result": "v",
+        "code": "var s = int.Parse(arguments); return s;"
+      },
+    
+      {
+        "$type": "trace",
+        "text": "v.ToString()"
+      }
+    ]
+  }
+}
