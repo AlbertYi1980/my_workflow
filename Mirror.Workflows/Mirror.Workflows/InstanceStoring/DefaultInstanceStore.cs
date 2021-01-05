@@ -3,10 +3,12 @@ using System.Activities.DurableInstancing;
 using System.Activities.Runtime.DurableInstancing;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Threading;
 using System.Xml.Linq;
+using Mirror.Workflows.Activities;
 
 // ReSharper disable UnusedParameter.Local
 
@@ -84,9 +86,10 @@ namespace Mirror.Workflows.InstanceStoring
             }
             else
             {
+              var foo =   command.InstanceData.Values.Skip(2).First().Value.GetType();
+                
                 var data = SerializeData(command.InstanceData);
-                var metadata =
-                    SerializeMetadata(context.InstanceView.InstanceMetadata, command.InstanceMetadataChanges);
+                var metadata = SerializeMetadata(context.InstanceView.InstanceMetadata, command.InstanceMetadataChanges);
 
                 _repository.Save(context.InstanceView.InstanceId, new InstanceDataPackage(metadata, data));
 

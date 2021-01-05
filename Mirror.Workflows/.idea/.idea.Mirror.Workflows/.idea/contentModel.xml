@@ -27,7 +27,7 @@
       <e p="Mirror.Workflows" t="IncludeRecursive">
         <e p="Activities" t="Include">
           <e p="ActivityCompiler.cs" t="Include" />
-          <e p="ActivityExecutor.cs" t="Include" />
+          <e p="ActivityExecuto.cs" t="Include" />
           <e p="ActivityManager.cs" t="Include" />
           <e p="Parsers" t="Include">
             <e p="ActivityParseUtil.cs" t="Include" />

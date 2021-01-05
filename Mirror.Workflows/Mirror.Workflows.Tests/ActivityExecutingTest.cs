@@ -29,7 +29,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -43,7 +43,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -57,7 +57,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -71,7 +71,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -85,7 +85,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -99,7 +99,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
@@ -115,7 +115,7 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
 
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity, new Dictionary<string, object>() {{"content1", "we win"}});
         }
 
@@ -130,7 +130,7 @@ namespace Mirror.Workflows.Tests
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }    
         
@@ -146,7 +146,7 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
-            var executor = new ActivityExecutor(store);
+            var executor = new ActivityExecuto(store);
             var appId = executor.Run(activity);
 
             var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
@@ -164,7 +164,7 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
-            var executor = new ActivityExecutor(store);
+            var executor = new ActivityExecuto(store);
             var appId = executor.Run(activity);
 
             var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
@@ -199,7 +199,7 @@ namespace MyModel
             var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
             var compiler = new ActivityCompiler(typeContainer);
             compiler.Compile("nnn", "mmmm", activity);
-            var executor = new ActivityExecutor(null);
+            var executor = new ActivityExecuto(null);
             executor.Run(activity);
         }
 
