@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Mirror.Workflows.Types
 {
@@ -27,12 +28,28 @@ namespace Mirror.Workflows.Types
                 typeof(byte),
                 typeof(bool),
                 typeof(TimeSpan),
-                typeof(DateTime)
+                typeof(DateTime),
+             
             };
 
             foreach (var wellKnownType in wellKnownTypes)
             {
                 _types.Add(wellKnownType.Name, wellKnownType);
+            }
+
+            var representativeTypes = new[]
+            {
+                typeof(JsonSerializer),
+                typeof(IList<>),
+                typeof(Enumerable)
+            };
+            
+            foreach (var representativeType in representativeTypes)
+            {
+                foreach (var type in  representativeType.Assembly.GetTypes())
+                {
+                     _types.TryAdd(type.Name, type);
+                }
             }
         }
 

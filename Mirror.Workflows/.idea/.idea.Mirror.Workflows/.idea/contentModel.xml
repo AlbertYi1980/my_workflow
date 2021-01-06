@@ -102,9 +102,22 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Descriptors" t="Include">
           <e p="CSharpDescriptor.cs" t="Include" />
+          <e p="MirrorCreateDescriptor.cs" t="Include" />
+          <e p="MirrorDeleteDescriptor.cs" t="Include" />
+          <e p="MirrorDetailDescriptor.cs" t="Include" />
+          <e p="MirrorExpressionHelper.cs" t="Include" />
+          <e p="MirrorQueryDescriptor.cs" t="Include" />
+          <e p="MirrorUpdateDescriptor.cs" t="Include" />
         </e>
         <e p="Mirror.Workflows.CustomActivities.csproj" t="IncludeRecursive" />
-        <e p="MirrorCrud" t="Include" />
+        <e p="MirrorCrud" t="Include">
+          <e p="MirrorCreate.cs" t="Include" />
+          <e p="MirrorCrud.cs" t="Include" />
+          <e p="MirrorDelete.cs" t="Include" />
+          <e p="MirrorDetail.cs" t="Include" />
+          <e p="MirrorQuery.cs" t="Include" />
+          <e p="MirrorUpdate.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="net5.0" t="Include">
@@ -156,6 +169,11 @@
           <e p="foreach.json" t="Include" />
           <e p="if.json" t="Include" />
           <e p="mirror.json" t="Include" />
+          <e p="mirrorCreate.json" t="Include" />
+          <e p="mirrorDelete.json" t="Include" />
+          <e p="mirrorDetail.json" t="Include" />
+          <e p="mirrorQuery.json" t="Include" />
+          <e p="mirrorUpdate.json" t="Include" />
           <e p="sequence.json" t="Include" />
           <e p="stateMachine.json" t="Include" />
           <e p="switch.json" t="Include" />
@@ -170,6 +188,7 @@
         </e>
         <e p="DynamicLoadingTest.cs" t="Include" />
         <e p="Mirror.Workflows.Tests.csproj" t="IncludeRecursive" />
+        <e p="MirrorFilterExpressionTest.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="net5.0" t="Include">

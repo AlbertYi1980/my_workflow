@@ -1,0 +1,31 @@
+{
+  "implementation": {
+    "$type": "sequence",
+    "variables": [
+      {
+        "type": "student",
+        "name": "s",
+        "default": "new student { data = new student_data { name = \"cai\" , age = 33 } }"
+      },
+      {
+        "type": "student",
+        "name": "r"
+      }
+    ],
+    "activities": [
+      {
+        "$type": "mirrorCreate",
+        "mirrorBase": "\"http://localhost:5000/\"",
+        "tenantId": "\"123456\"",
+        "modelKey": "student",
+        "model": "s",
+        "result": "r"
+      },
+      {
+        "$type": "trace",
+        "text": "r.id.ToString()"
+      }
+    ]
+  }
+}
+

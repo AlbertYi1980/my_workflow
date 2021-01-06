@@ -29,8 +29,8 @@ namespace Mirror.Workflows.CustomActivities.Descriptors
             var code = node.GetProperty("code").GetString();
             var displayName = ActivityParseUtil.GetDisplayName(node);
             var result = node.GetProperty("result").GetString();
-            _methodInfo = _methodInfo!.MakeGenericMethod(inputType, outputType);
-            return (Activity)_methodInfo.Invoke(this, new object[] {displayName, code, result, arguments});
+             var methodInfo = _methodInfo!.MakeGenericMethod(inputType, outputType);
+            return (Activity)methodInfo.Invoke(this, new object[] {displayName, code, result, arguments});
         }
 
         private Activity CreateNode<TIn, TOut>(string displayName, string code, string result, string arguments)

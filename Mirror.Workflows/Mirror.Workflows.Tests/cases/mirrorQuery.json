@@ -1,0 +1,47 @@
+{
+    "implementation": {
+        "$type": "sequence",
+        "variables": [
+            {
+                "type": "int",
+                "name": "selectedAge",
+                "default": "1"
+            },
+            {
+                "type": "object",
+                "name": "r"
+            }
+        ],
+        "activities": [
+            {
+                "$type": "mirrorQuery",
+                "mirrorBase": "\"http://localhost:5000/\"",
+                "tenantId": "\"439795053355905024\"",
+                "modelKey": "student",
+                "filter": "{\"age\":${selectedAge}}",
+                "sort": "{}",
+                "result": "r"
+            },
+            {
+                "$type": "if",
+                "condition": "!(r as IEnumerable<student>).Any()",
+                "then": {
+                    "$type": "trace",
+                    "text": "\"no data.\""
+                },
+                "else":  {
+                    "$type":"foreach",
+                    "type": "student",
+                    "values" :"r as IEnumerable<student>",
+                    "valueName" :"s",
+                    "body" : {
+                        "$type":"trace",
+                        "text":"s.data.name.ToString()"
+                    }
+                }
+            }
+           
+        ]
+    }
+}
+

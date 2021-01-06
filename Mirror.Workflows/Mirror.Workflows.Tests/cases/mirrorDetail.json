@@ -1,0 +1,31 @@
+{
+    "implementation": {
+        "$type": "sequence",
+        "variables": [
+            {
+                "type": "string",
+                "name": "id",
+                "default": "\"5ff51ac14426fdbfe2f1deb4\""
+            },
+            {
+                "type": "student",
+                "name": "r"
+            }
+        ],
+        "activities": [
+            {
+                "$type": "mirrorDetail",
+                "mirrorBase": "\"http://localhost:5000/\"",
+                "tenantId": "\"123456\"",
+                "modelKey": "student",
+                "filter": "{ \"id\": ${id} }",
+                "result": "r"
+            },
+            {
+                "$type": "trace",
+                "text": "r == null ? \"not found\" : r.data.name.ToString()"
+            }
+        ]
+    }
+}
+

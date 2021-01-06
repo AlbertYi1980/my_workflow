@@ -1,0 +1,37 @@
+{
+    "implementation": {
+        "$type": "sequence",
+        "variables": [
+            {
+                "type": "string",
+                "name": "id",
+                "default": "\"5f993fa30141b45aca8a36fd\""
+            },
+            {
+                "type": "string",
+                "name": "newName",
+                "default": "\"hell\""
+            },
+            {
+                "type": "bool",
+                "name": "success"
+            }
+        ],
+        "activities": [
+            {
+                "$type": "mirrorUpdate",
+                "mirrorBase": "\"http://localhost:5000/\"",
+                "tenantId": "\"439795053355905024\"",
+                "modelKey": "student",
+                "filter": "{ \"id\": ${id} }",
+                "model": "{ \"data.name\": \"kevin\" }",
+                "result": "success"
+            },
+            {
+                "$type": "trace",
+                "text": "success.ToString()"
+            }
+        ]
+    }
+}
+

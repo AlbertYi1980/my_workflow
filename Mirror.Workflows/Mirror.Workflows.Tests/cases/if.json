@@ -4,7 +4,7 @@
   {
     "$type": "if",
     "displayName": "if",
-    "condition": "1==1",
+    "condition": "1==2",
     "then": {
       "$type": "trace",
       "displayName": "writeLine",

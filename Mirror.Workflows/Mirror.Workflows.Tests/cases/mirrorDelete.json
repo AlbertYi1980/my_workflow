@@ -1,0 +1,31 @@
+{
+    "implementation": {
+        "$type": "sequence",
+        "variables": [
+            {
+                "type": "string",
+                "name": "id",
+                "default": "\"5ff5256f4426fdbfe2f1deb6\""
+            },
+            {
+                "type": "bool",
+                "name": "success"
+            }
+        ],
+        "activities": [
+            {
+                "$type": "mirrorDelete",
+                "mirrorBase": "\"http://localhost:5000/\"",
+                "tenantId": "\"123456\"",
+                "modelKey": "student",
+                "filter": "{ \"id\": ${id} }",
+                "result": "success"
+            },
+            {
+                "$type": "trace",
+                "text": "success.ToString()"
+            }
+        ]
+    }
+}
+

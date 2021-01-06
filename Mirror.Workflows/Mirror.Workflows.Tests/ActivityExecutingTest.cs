@@ -165,7 +165,7 @@ namespace Mirror.Workflows.Tests
             var compiler = new ActivityCompiler(wellKnownTypeContainer);
             compiler.Compile("nnn", "mmmm", activity);
             var executor = new ActivityExecutor(null);
-            var appId = executor.Run(activity, new Dictionary<string, object>{ {"a","kknd"}});
+            var appId = executor.Run(activity, new Dictionary<string, object>{ {"a","ggggg"}});
 
         }    
 
@@ -185,9 +185,213 @@ namespace Mirror.Workflows.Tests
             var appId = executor.Run(activity);
 
         }    
-
-
         
+        
+        [Fact]
+        public void RunMirrorCreate()
+        {
+            var code = @"
+    using System;
+namespace MyModels
+{
+    public class student
+    {
+        public string id {get;set;}
+        public student_data data { get; set; }
+    }
+
+    public class student_data
+    {
+        public string name {get;set;}
+        public int age {get;set;}
+    }
+}
+";
+            var assemblyName = "t_123_v_1.1";
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new MirrorCreateDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, typeContainer);
+            var definition = LoadDefinition("mirrorCreate");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+
+        }    
+
+        [Fact]
+        public void RunMirrorDetail()
+        {
+            var code = @"
+    using System;
+namespace MyModels
+{
+    public class student
+    {
+        public string id {get;set;}
+        public student_data data { get; set; }
+    }
+
+    public class student_data
+    {
+        public string name {get;set;}
+        public int age {get;set;}
+    }
+}
+";
+            var assemblyName = "t_123_v_1.1";
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new MirrorDetailDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, typeContainer);
+            var definition = LoadDefinition("mirrorDetail");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+
+        } 
+        
+        [Fact]
+        public void RunMirrorQuery()
+        {
+            var code = @"
+    using System;
+namespace MyModels
+{
+    public class student
+    {
+        public string id {get;set;}
+        public student_data data { get; set; }
+    }
+
+    public class student_data
+    {
+        public string name {get;set;}
+        public int age {get;set;}
+    }
+}
+";
+            var assemblyName = "t_123_v_1.1";
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new MirrorQueryDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, typeContainer);
+            var definition = LoadDefinition("mirrorQuery");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+
+        } 
+        
+        [Fact]
+        public void RunMirrorDelete()
+        {
+            var code = @"
+    using System;
+namespace MyModels
+{
+    public class student
+    {
+        public string id {get;set;}
+        public student_data data { get; set; }
+    }
+
+    public class student_data
+    {
+        public string name {get;set;}
+        public int age {get;set;}
+    }
+}
+";
+            var assemblyName = "t_123_v_1.1";
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new MirrorDeleteDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, typeContainer);
+            var definition = LoadDefinition("mirrorDelete");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+
+        } 
+        
+        
+        [Fact]
+        public void RunMirrorUpdate()
+        {
+            var code = @"
+    using System;
+namespace MyModels
+{
+    public class student
+    {
+        public string id {get;set;}
+        public student_data data { get; set; }
+    }
+
+    public class student_data
+    {
+        public string name {get;set;}
+        public int age {get;set;}
+    }
+}
+";
+            var assemblyName = "t_123_v_1.1";
+
+            var wellKnownTypeContainer = new WellKnownTypeContainer();
+            var typeContainer = new TypeContainer(wellKnownTypeContainer);
+            var assembly = DynamicModelLoader.Load(assemblyName, code);
+            foreach (var type in assembly.GetTypes())
+            {
+                typeContainer.Add(type);
+            }
+            var descriptorContainer = new DescriptorContainer(new WellKnownDescriptorContainer());
+            descriptorContainer.Add(new MirrorUpdateDescriptor());
+            var customActivityParser = new CustomActivityParser(descriptorContainer, typeContainer);
+            var definition = LoadDefinition("mirrorUpdate");
+            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            var compiler = new ActivityCompiler(typeContainer);
+            compiler.Compile("nnn", "mmmm", activity);
+            var executor = new ActivityExecutor(null);
+            executor.Run(activity);
+
+        } 
         
         [Fact]
         public void RunTemp()
@@ -210,19 +414,19 @@ namespace Mirror.Workflows.Tests
         [Fact]
         public void  RunUserTask()
         {
-            var wellKnownTypeContainer = new WellKnownTypeContainer();
-            var customActivityParser =
-                new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
-            var definition = LoadDefinition("userTask");
-            var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
-            var compiler = new ActivityCompiler(wellKnownTypeContainer);
-            compiler.Compile("nnn", "mmmm", activity);
-            var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
-            // var store = new FileInstanceStore("e:\\workflow-instances");
-            var executor = new ActivityExecutor(null);
-            var appId = executor.Run(activity);
-            
-            var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
+            // var wellKnownTypeContainer = new WellKnownTypeContainer();
+            // var customActivityParser =
+            //     new CustomActivityParser(new WellKnownDescriptorContainer(), wellKnownTypeContainer);
+            // var definition = LoadDefinition("userTask");
+            // var activity = customActivityParser.Parse(JsonSerializer.Deserialize<JsonElement>(definition));
+            // var compiler = new ActivityCompiler(wellKnownTypeContainer);
+            // compiler.Compile("nnn", "mmmm", activity);
+            // var store = new DefaultInstanceStore(new StrongTypeJsonFileRepository("e:\\workflow-instances"));
+            // // var store = new FileInstanceStore("e:\\workflow-instances");
+            // var executor = new ActivityExecutor(null);
+            // var appId = executor.Run(activity);
+            //
+            // var resumeSuccess = executor.Resume(activity, appId, "input", "aaaaa");
            
         }
 

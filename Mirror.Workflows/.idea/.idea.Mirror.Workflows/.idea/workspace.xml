@@ -28,34 +28,32 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94757938-d10d-418b-856c-baeca08f3a5b" name="Default Changelist" comment="persistence">
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/CSharpDescriptor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Scripts/CSharpScript.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Repositories/StrongTypeJsonFileRepository1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Scripts/CSharpExecutor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Scripts/PythonExecutor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/SerializationTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/arguments.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/csharp.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/variables.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/TestFileInstanceStore/AsyncResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/TestFileInstanceStore/TestFileInstanceStore.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/TestFileInstanceStore/TestFileInstanceStore.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/TestFileInstanceStore/TypedAsyncResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/TestFileInstanceStore/TypedCompletedAsyncResult.cs" afterDir="false" />
+    <list default="true" id="94757938-d10d-418b-856c-baeca08f3a5b" name="Default Changelist" comment="csharp script">
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorCreateDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorDeleteDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorDetailDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorExpressionHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorQueryDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorUpdateDescriptor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorCreate.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorCrud.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorDelete.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorDetail.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorUpdate.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/MirrorFilterExpressionTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorCreate.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorDelete.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorDetail.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorQuery.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorUpdate.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mirror.Workflows/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mirror.Workflows/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/CSharpDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/CSharpDescriptor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Mirror.Workflows.CustomActivities.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Mirror.Workflows.CustomActivities.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.Repositories/StrongTypeJsonFileRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.Repositories/StrongTypeJsonFileRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mirror.Workflows.Tests/ActivityExecutingTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/ActivityExecutingTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.Tests/Mirror.Workflows.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/Mirror.Workflows.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/temp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/Activities/ActivityExecuto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/Activities/ActivityExecutor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/CompositeActivityParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/CompositeActivityParser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/DefaultInstanceStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/DefaultInstanceStore.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/InstanceDataPackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/InstanceDataPackage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/Mirror.Workflows.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/Mirror.Workflows.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/if.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/if.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mirror.Workflows/Types/WellKnownTypeContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mirror.Workflows/Types/WellKnownTypeContainer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +70,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1F34288-1C82-4689-90F4-2604E6D0A2A7/94/960c2935/Sequence.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/E1F34288-1C82-4689-90F4-2604E6D0A2A7/30/645d15c0/02000125.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1F34288-1C82-4689-90F4-2604E6D0A2A7/60/d4b93195/Bookmark.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1F34288-1C82-4689-90F4-2604E6D0A2A7/61/100f79ce/Activity`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1F34288-1C82-4689-90F4-2604E6D0A2A7/36/da510ca0/DoWhile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1F34288-1C82-4689-90F4-2604E6D0A2A7/3e/296f28e3/BookmarkCallbackWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/56CD075F-8373-467E-9260-CFBAE917BBD1/f5/371f7067/CSharpAheadOfTimeCompiler.cs" root0="SKIP_HIGHLIGHTING" />
@@ -103,29 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/CustomActivityDescriptor.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Types/TypeNameNormalizer.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/CustomActivityParser.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/if.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/trace.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/dynamic.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Types/TypeContainer.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/ActivityParseUtil.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/sequence.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/assign.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/switch.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/WellKnown/SwitchDescriptor.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/WellKnown/ForeachDescriptor.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/foreach.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/stateMachine.json" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/WellKnown/StateMachineDescriptor.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/WellKnown/AssignDescriptor.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/InstanceDataPackage.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/FileInstanceRepository.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/InstanceStoring/JsonInstanceStore.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Repositories/Class1.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Repositories/FileInstanceRepository.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows/Types/WellKnownTypeContainer.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/ActivityExecutor.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Specials/UserTask.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/Descriptors/WellKnown/UserTaskDescriptor.cs" />
@@ -149,11 +125,34 @@
         <option value="$PROJECT_DIR$/Mirror.Workflows.Scripts/PythonExecutor.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/a.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/CompositeActivityParser.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/ActivityExecutingTest.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.Scripts/CSharpExecutor.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Scripts/CSharpScript.cs" />
-        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/CSharpDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Scripts/CSharpExecutor.cs" />
         <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/csharp.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorCreate.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorDelete.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/TypeInfoProviderTest.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/a.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorCrud.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows/Activities/Parsers/MirrorExpressionHelper.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/MirrorFilterExpressionTest.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/CSharpDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorExpressionHelper.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows/Types/WellKnownTypeContainer.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorDetail.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorQueryDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorQuery.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorCreateDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorDeleteDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorDetailDescriptor.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorUpdate.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/if.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/ActivityExecutingTest.cs" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorCreate.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorDelete.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorDetail.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorQuery.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.Tests/cases/mirrorUpdate.json" />
+        <option value="$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorUpdateDescriptor.cs" />
       </list>
     </option>
   </component>
@@ -224,101 +223,102 @@
     <MESSAGE value="dynamic compile activity" />
     <MESSAGE value="persistence" />
     <MESSAGE value="remove other projects" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove other projects" />
+    <MESSAGE value="csharp script" />
+    <option name="LAST_COMMIT_MESSAGE" value="csharp script" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="893" height="681" key="DebuggerActiveHint" timestamp="1609831454722">
+    <state width="893" height="681" key="DebuggerActiveHint" timestamp="1609850247744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="893" height="681" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609831454722" />
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom" timestamp="1609833400066">
+    <state width="893" height="681" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609850247744" />
+    <state width="1877" height="365" key="GridCell.Tab.0.bottom" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.0.center" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.0.center" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.0.left" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.0.left" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.0.right" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.0.right" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.1.bottom" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.1.bottom" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.1.center" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.1.center" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.1.left" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.1.left" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.1.right" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.1.right" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.2.bottom" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.2.bottom" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.2.center" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.2.center" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.2.left" timestamp="1609833400066">
+    <state width="1877" height="365" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.2.left" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400066" />
-    <state width="1877" height="365" key="GridCell.Tab.2.right" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.2.right" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.3.bottom" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.3.bottom" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.3.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.3.center" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.3.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.3.center" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.3.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.3.left" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.3.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.3.left" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.3.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.3.right" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.3.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.3.right" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.3.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.4.bottom" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.3.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.4.bottom" timestamp="1609899627408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.4.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.4.center" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.4.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627408" />
+    <state width="1877" height="365" key="GridCell.Tab.4.center" timestamp="1609899627408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.4.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.4.left" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.4.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627408" />
+    <state width="1877" height="365" key="GridCell.Tab.4.left" timestamp="1609899627407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.4.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
-    <state width="1877" height="365" key="GridCell.Tab.4.right" timestamp="1609833400067">
+    <state width="1877" height="365" key="GridCell.Tab.4.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627407" />
+    <state width="1877" height="365" key="GridCell.Tab.4.right" timestamp="1609899627408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.4.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833400067" />
+    <state width="1877" height="365" key="GridCell.Tab.4.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899627408" />
     <state x="552" y="251" key="Rider.ProjectTemplateDialog.Size" timestamp="1609833894209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="251" key="Rider.ProjectTemplateDialog.Size/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609833894209" />
-    <state x="641" y="196" key="RiderGenerateDialog" timestamp="1609730758664">
+    <state x="641" y="196" key="RiderGenerateDialog" timestamp="1609839151266">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="641" y="196" key="RiderGenerateDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609730758664" />
+    <state x="641" y="196" key="RiderGenerateDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609839151266" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1609234126294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -327,22 +327,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609382266830" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1609824267534">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1609837405514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609824267534" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1609831382906">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609837405514" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1609899516942">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609831382906" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609899516942" />
     <state x="764" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609725558867">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="764" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609725558867" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1609826544958">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1609850286579">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609826544958" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609850286579" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -472,28 +472,47 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Mirror.Workflows/Activities/ActivityExecutor.cs</url>
           <line>60</line>
-          <properties documentPath="C:\Users\yicheng\source\repos\my_workflow\Mirror.Workflows\Mirror.Workflows\Activities\ActivityExecuto.cs" initialLine="60">
-            <startOffsets>
-              <option value="1991" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2053" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\yicheng\source\repos\my_workflow\Mirror.Workflows\Mirror.Workflows\Activities\ActivityExecuto.cs" initialLine="60" />
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Mirror.Workflows.Tests/ActivityExecutingTest.cs</url>
-          <line>224</line>
+          <line>428</line>
           <properties documentPath="C:\Users\yicheng\source\repos\my_workflow\Mirror.Workflows\Mirror.Workflows.Tests\ActivityExecutingTest.cs" initialLine="206">
             <startOffsets>
-              <option value="10165" />
+              <option value="17318" />
             </startOffsets>
             <endOffsets>
-              <option value="10236" />
+              <option value="17389" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Mirror.Workflows.CustomActivities/MirrorCrud/MirrorQuery.cs</url>
+          <line>19</line>
+          <properties documentPath="C:\Users\yicheng\source\repos\my_workflow\Mirror.Workflows\Mirror.Workflows.CustomActivities\MirrorCrud\MirrorQuery.cs" initialLine="19">
+            <startOffsets>
+              <option value="523" />
+            </startOffsets>
+            <endOffsets>
+              <option value="532" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Mirror.Workflows.CustomActivities/Descriptors/MirrorUpdateDescriptor.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\yicheng\source\repos\my_workflow\Mirror.Workflows\Mirror.Workflows.CustomActivities\Descriptors\MirrorUpdateDescriptor.cs" initialLine="31">
+            <startOffsets>
+              <option value="1313" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1373" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -508,8 +527,8 @@
       <map>
         <entry key="flags" value="0" />
         <entry key="mode" value="0" />
-        <entry key="regex" value="(19||20)\d\d([- /.])(0[1-9]||1[012])\2(0[1-9]||[12][0-9]||3[01])" />
-        <entry key="text" value="1900-01-01 2007/08/13 1900.01.01 1900 01 01 1900-01.01 1900 13 01 1900 02 31" />
+        <entry key="regex" value="^((?&lt;t&gt;.+)\|d\{\s*(?&lt;vn&gt;\S+)\s*\})*((?&lt;ta&gt;.*))|d" />
+        <entry key="text" value="bbbb|d{abb}bbbbbbbbb|d{ccc}ddd|d{xxx}dddd" />
       </map>
     </option>
   </component>
